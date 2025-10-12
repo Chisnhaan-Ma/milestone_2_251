@@ -4,8 +4,8 @@ module pc (
   input logic i_reset,
   input logic [31:0] i_pc_data_in,
   output logic [31:0] o_pc_data_out);
-  always_ff @(posedge i_clk or negedge i_reset) begin
-    if (i_reset==0) begin
+  always_ff @(posedge i_clk or posedge i_reset) begin
+    if (i_reset) begin
       o_pc_data_out <= 32'b0;
     end
     else 

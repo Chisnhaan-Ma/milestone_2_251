@@ -13,6 +13,7 @@ module control_unit(
 	output logic o_asel,
 	output logic [3:0]o_alu_op,
 	output logic o_wren,
+	output logic [2:0 ]o_slt_sl,
 	output logic [2:0]o_load_type,
 	output logic [1:0]o_wb_sel);
 	
@@ -53,7 +54,10 @@ module control_unit(
 						3'b101: o_alu_op = (i_inst[30]) ? 4'b1101 : 4'b0101; // SRA nếu i_inst[30] = 1, SRL nếu i_inst[30] = 0
 						3'b110: o_alu_op = 4'b0110; // OR
 						3'b111: o_alu_op = 4'b0111; // AND
-						default: o_alu_op = 4'b0000; // Mặc định là ADD
+						default: begin
+							o_insn_vld_ctrl =  1'b0;
+							o_alu_op = 4'b0000; // Mặc định là ADD
+						end
 					endcase
 			end
 			
@@ -76,7 +80,10 @@ module control_unit(
 						3'b101: o_alu_op = (i_inst[30]) ? 4'b1101 : 4'b0101; // SRAI nếu i_inst[30] = 1, SRLI nếu i_inst[30] = 0
 						3'b110: o_alu_op = 4'b0110; // ORI
 						3'b111: o_alu_op = 4'b0111; // ANDI
-						default: o_alu_op = 4'b0000; // Mặc định là ADD
+						default: begin
+							o_insn_vld_ctrl =  1'b0;
+							o_alu_op = 4'b0000; // Mặc định là ADD
+						end
 					endcase																							
 			end
 				
@@ -95,7 +102,10 @@ module control_unit(
 						3'b010: o_load_type = 3'b010; //LW
 						3'b100: o_load_type = 3'b100; //LBU					
 						3'b101: o_load_type = 3'b101; //LHU			
-						default: o_load_type = 3'b000; 
+						default: begin
+							o_insn_vld_ctrl =  1'b0;
+							o_load_type = 3'b000; 
+						end
 					endcase
 			end
 			
@@ -108,6 +118,15 @@ module control_unit(
 				o_wren = 1'b1; //cho phép đọc và ghi DMEM
 				o_alu_op = 4'b0000;	// Thực hiện phép cộng
 				o_wb_sel = 2'b11; //write back là tùy định vì không ghi ngược lại vào regfile
+				case (funct3)
+					3'b000: o_slt_sl = 3'b000; // sb
+					3'b001: o_slt_sl = 3'b001; // sh
+					3'b010: o_slt_sl = 3'b010; // sw
+					default begin
+						o_slt_sl = 3'b010;
+						o_insn_vld_ctrl =  1'b0;
+            		end
+          		endcase
 			end
 			
 			7'b1100011: begin	// B-type
@@ -126,7 +145,10 @@ module control_unit(
 					3'b101: begin o_br_un = 1'b0; o_pc_sel = ~i_br_less; end//BGE
 					3'b110: begin o_br_un = 1'b1;	o_pc_sel = i_br_less;	end//BLTU
 					3'b111: begin o_br_un = 1'b1;	o_pc_sel = ~i_br_less;	end//BGEU
-					default: o_pc_sel = 1'b0; // Không nhảy nếu opcode không hợp lệ
+					default: begin
+						o_pc_sel = 1'b0; // Không nhảy nếu opcode không hợp lệ
+						o_insn_vld_ctrl =  1'b0;
+					end
 				endcase
 			end
 			

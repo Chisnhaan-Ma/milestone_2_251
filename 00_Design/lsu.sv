@@ -31,6 +31,7 @@ module lsu(
 
 
 endmodule
+
 module lsu_2(
   //input
   input logic         i_clk,

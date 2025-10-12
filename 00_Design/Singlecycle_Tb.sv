@@ -17,8 +17,7 @@ module Singlecycle_Tb();
         //force singlecycle_test_top.regfile_top.i_rd_wren = 1'b1;
         clk = 0;
         reset = 1;    // Reset để PC = 0
-        #3;reset = 0;
-        #15;reset = 1;  
+        #3;reset = 0; 
         #500;
         $finish;  
     end

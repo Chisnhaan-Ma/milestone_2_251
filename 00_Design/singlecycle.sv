@@ -72,6 +72,7 @@ module singlecycle(
     logic [31:0] rdata;
     logic [2:0]  load_type;
 	logic [31:0] load_result;
+    logic [2:0]  slt_sl;
     logic        wren;
 
     //For write back
@@ -99,7 +100,6 @@ module singlecycle(
         .Result(pc_add4_out));
 
     inst_memory inst_memory_top (
-        .i_reset(i_reset),
         .i_addr(pc_data_out),
         .o_rdata(inst)
         );
@@ -153,6 +153,7 @@ module singlecycle(
         .o_bsel(bsel),
         .o_alu_op(alu_op),
         .o_wren(wren),
+        .o_slt_sl(slt_sl)
         .o_load_type(load_type),
         .o_wb_sel(wb_sel)
     );

@@ -11,9 +11,9 @@ module data_memory(
 
     logic [31:0]memory[0:255];
 
-    always_ff @(posedge i_clk or negedge i_reset) begin
+    always_ff @(posedge i_clk or posedge i_reset) begin
         // RESET
-        if(i_reset == 0) begin
+        if(i_reset) begin
             for (int i=0; i<256;i++) memory[i] <= 32'b0;
         end
 

@@ -16,8 +16,8 @@ module regfile (
   logic [31:0] Reg [31:0];
 
   // --- RESET + WRITE LOGIC ---
-  always_ff @(posedge i_clk or negedge i_reset) begin
-    if (!i_reset) begin
+  always_ff @(posedge i_clk or posedge i_reset) begin
+    if (i_reset) begin
       // Reset tất cả 32 thanh ghi về 0
       for (int i = 0; i < 32; i++)
         Reg[i] <= 32'h0;
