@@ -1,0 +1,668 @@
+Analysis & Synthesis report for single_cycle
+Sun Oct 12 21:44:03 2025
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Port Connectivity Checks: "control_unit:control_unit_top"
+ 13. Port Connectivity Checks: "brc:brc_top|Add_Sub_32bit:subtractor"
+ 14. Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLTU_MODULE_inst"
+ 15. Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB"
+ 16. Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLT_MODULE_inst"
+ 17. Port Connectivity Checks: "alu:alu_top|Add_Sub_32bit:ADD_SUB_inst"
+ 18. Port Connectivity Checks: "Add_Sub_32bit:pc_add4"
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+ 21. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Oct 12 21:44:02 2025           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; single_cycle                                    ;
+; Top-level Entity Name              ; single_cycle                                    ;
+; Family                             ; Cyclone IV GX                                   ;
+; Total logic elements               ; 115,608                                         ;
+;     Total combinational functions  ; 49,080                                          ;
+;     Dedicated logic registers      ; 66,625                                          ;
+; Total registers                    ; 66625                                           ;
+; Total pins                         ; 35                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total GXB Receiver Channel PCS     ; 0                                               ;
+; Total GXB Receiver Channel PMA     ; 0                                               ;
+; Total GXB Transmitter Channel PCS  ; 0                                               ;
+; Total GXB Transmitter Channel PMA  ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Top-level entity name                                                      ; single_cycle       ; single_cycle       ;
+; Family name                                                                ; Cyclone IV GX      ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 8      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                 ;
++---------------------------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                                                ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                              ; Library ;
++---------------------------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+; single_cycle.sv                                                                 ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/single_cycle.sv ;         ;
+; alu.sv                                                                          ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/alu.sv          ;         ;
+; brc.sv                                                                          ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/brc.sv          ;         ;
+; control_unit.sv                                                                 ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/control_unit.sv ;         ;
+; data_memory.sv                                                                  ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/data_memory.sv  ;         ;
+; imm_gen.sv                                                                      ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/imm_gen.sv      ;         ;
+; inst_memory.sv                                                                  ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/inst_memory.sv  ;         ;
+; load_unit.sv                                                                    ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/load_unit.sv    ;         ;
+; lsu.sv                                                                          ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/lsu.sv          ;         ;
+; mux_2_1.sv                                                                      ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/mux_2_1.sv      ;         ;
+; mux_3_1.sv                                                                      ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/mux_3_1.sv      ;         ;
+; pc.sv                                                                           ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/pc.sv           ;         ;
+; regfile.sv                                                                      ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/regfile.sv      ;         ;
+; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_design/mem.dump ; yes             ; Auto-Found Unspecified File  ; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_design/mem.dump           ;         ;
++---------------------------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary ;
++--------------------------+------------------+
+; Resource                 ; Usage            ;
++--------------------------+------------------+
+; I/O pins                 ; 35               ;
+; DSP block 9-bit elements ; 0                ;
+; Maximum fan-out node     ; i_clk~input      ;
+; Maximum fan-out          ; 66625            ;
+; Total fan-out            ; 404686           ;
+; Average fan-out          ; 3.50             ;
++--------------------------+------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers  ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                             ; Library Name ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; |single_cycle                            ; 49080 (0)         ; 66625 (33)    ; 0           ; 0            ; 0       ; 0         ; 0         ; 35   ; 0            ; |single_cycle                                                                                   ; work         ;
+;    |Add_Sub_32bit:pc_add4|               ; 33 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4                                                             ; work         ;
+;       |Full_Adder:adder_32[10].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[10].FA                                  ; work         ;
+;       |Full_Adder:adder_32[12].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[12].FA                                  ; work         ;
+;       |Full_Adder:adder_32[13].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[13].FA                                  ; work         ;
+;       |Full_Adder:adder_32[15].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[15].FA                                  ; work         ;
+;       |Full_Adder:adder_32[16].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[16].FA                                  ; work         ;
+;       |Full_Adder:adder_32[17].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[17].FA                                  ; work         ;
+;       |Full_Adder:adder_32[18].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[18].FA                                  ; work         ;
+;       |Full_Adder:adder_32[19].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[19].FA                                  ; work         ;
+;       |Full_Adder:adder_32[20].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[20].FA                                  ; work         ;
+;       |Full_Adder:adder_32[21].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[21].FA                                  ; work         ;
+;       |Full_Adder:adder_32[22].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[22].FA                                  ; work         ;
+;       |Full_Adder:adder_32[23].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[23].FA                                  ; work         ;
+;       |Full_Adder:adder_32[24].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[24].FA                                  ; work         ;
+;       |Full_Adder:adder_32[25].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[25].FA                                  ; work         ;
+;       |Full_Adder:adder_32[26].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[26].FA                                  ; work         ;
+;       |Full_Adder:adder_32[27].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[27].FA                                  ; work         ;
+;       |Full_Adder:adder_32[28].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[28].FA                                  ; work         ;
+;       |Full_Adder:adder_32[30].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[30].FA                                  ; work         ;
+;       |Full_Adder:adder_32[31].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[31].FA                                  ; work         ;
+;       |Full_Adder:adder_32[3].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[3].FA                                   ; work         ;
+;       |Full_Adder:adder_32[4].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[4].FA                                   ; work         ;
+;       |Full_Adder:adder_32[5].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[5].FA                                   ; work         ;
+;       |Full_Adder:adder_32[6].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[6].FA                                   ; work         ;
+;       |Full_Adder:adder_32[7].FA|        ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[7].FA                                   ; work         ;
+;       |Full_Adder:adder_32[9].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|Add_Sub_32bit:pc_add4|Full_Adder:adder_32[9].FA                                   ; work         ;
+;    |alu:alu_top|                         ; 596 (265)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top                                                                       ; work         ;
+;       |Add_Sub_32bit:ADD_SUB_inst|       ; 44 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst                                            ; work         ;
+;          |Full_Adder:FA0|                ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:FA0                             ; work         ;
+;          |Full_Adder:adder_32[10].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[10].FA                 ; work         ;
+;          |Full_Adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[11].FA                 ; work         ;
+;          |Full_Adder:adder_32[12].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[12].FA                 ; work         ;
+;          |Full_Adder:adder_32[13].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[13].FA                 ; work         ;
+;          |Full_Adder:adder_32[14].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[14].FA                 ; work         ;
+;          |Full_Adder:adder_32[15].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[15].FA                 ; work         ;
+;          |Full_Adder:adder_32[16].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[16].FA                 ; work         ;
+;          |Full_Adder:adder_32[17].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[17].FA                 ; work         ;
+;          |Full_Adder:adder_32[18].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[18].FA                 ; work         ;
+;          |Full_Adder:adder_32[19].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[19].FA                 ; work         ;
+;          |Full_Adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[1].FA                  ; work         ;
+;          |Full_Adder:adder_32[20].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[20].FA                 ; work         ;
+;          |Full_Adder:adder_32[21].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[21].FA                 ; work         ;
+;          |Full_Adder:adder_32[22].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[22].FA                 ; work         ;
+;          |Full_Adder:adder_32[23].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[23].FA                 ; work         ;
+;          |Full_Adder:adder_32[24].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[24].FA                 ; work         ;
+;          |Full_Adder:adder_32[25].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[25].FA                 ; work         ;
+;          |Full_Adder:adder_32[26].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[26].FA                 ; work         ;
+;          |Full_Adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[27].FA                 ; work         ;
+;          |Full_Adder:adder_32[28].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[28].FA                 ; work         ;
+;          |Full_Adder:adder_32[29].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[29].FA                 ; work         ;
+;          |Full_Adder:adder_32[2].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[2].FA                  ; work         ;
+;          |Full_Adder:adder_32[3].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[3].FA                  ; work         ;
+;          |Full_Adder:adder_32[4].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[4].FA                  ; work         ;
+;          |Full_Adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[5].FA                  ; work         ;
+;          |Full_Adder:adder_32[6].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[6].FA                  ; work         ;
+;          |Full_Adder:adder_32[7].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[7].FA                  ; work         ;
+;          |Full_Adder:adder_32[8].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[8].FA                  ; work         ;
+;          |Full_Adder:adder_32[9].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Add_Sub_32bit:ADD_SUB_inst|Full_Adder:adder_32[9].FA                  ; work         ;
+;       |SLT_SLTU:SLT_MODULE_inst|         ; 58 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst                                              ; work         ;
+;          |Add_Sub_32bit:SUB|             ; 58 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB                            ; work         ;
+;             |Full_Adder:adder_32[10].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[10].FA ; work         ;
+;             |Full_Adder:adder_32[11].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[11].FA ; work         ;
+;             |Full_Adder:adder_32[12].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[12].FA ; work         ;
+;             |Full_Adder:adder_32[13].FA| ; 15 (15)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[13].FA ; work         ;
+;             |Full_Adder:adder_32[17].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[17].FA ; work         ;
+;             |Full_Adder:adder_32[18].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[18].FA ; work         ;
+;             |Full_Adder:adder_32[19].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[19].FA ; work         ;
+;             |Full_Adder:adder_32[20].FA| ; 7 (7)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[20].FA ; work         ;
+;             |Full_Adder:adder_32[21].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[21].FA ; work         ;
+;             |Full_Adder:adder_32[22].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[22].FA ; work         ;
+;             |Full_Adder:adder_32[23].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[23].FA ; work         ;
+;             |Full_Adder:adder_32[25].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[25].FA ; work         ;
+;             |Full_Adder:adder_32[26].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[26].FA ; work         ;
+;             |Full_Adder:adder_32[27].FA| ; 16 (16)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[27].FA ; work         ;
+;             |Full_Adder:adder_32[29].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[29].FA ; work         ;
+;             |Full_Adder:adder_32[2].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[2].FA  ; work         ;
+;             |Full_Adder:adder_32[30].FA| ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[30].FA ; work         ;
+;             |Full_Adder:adder_32[3].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[3].FA  ; work         ;
+;             |Full_Adder:adder_32[4].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[4].FA  ; work         ;
+;             |Full_Adder:adder_32[6].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[6].FA  ; work         ;
+;             |Full_Adder:adder_32[7].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[7].FA  ; work         ;
+;             |Full_Adder:adder_32[9].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB|Full_Adder:adder_32[9].FA  ; work         ;
+;       |Shift_Left_Logical:SLL_inst|      ; 108 (108)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Shift_Left_Logical:SLL_inst                                           ; work         ;
+;       |Shift_Right_Arithmetic:SRA_inst|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Shift_Right_Arithmetic:SRA_inst                                       ; work         ;
+;       |Shift_Right_Logical:SRL_inst|     ; 120 (120)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|alu:alu_top|Shift_Right_Logical:SRL_inst                                          ; work         ;
+;    |brc:brc_top|                         ; 68 (23)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top                                                                       ; work         ;
+;       |Add_Sub_32bit:subtractor|         ; 45 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor                                              ; work         ;
+;          |Full_Adder:adder_32[10].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[10].FA                   ; work         ;
+;          |Full_Adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[11].FA                   ; work         ;
+;          |Full_Adder:adder_32[12].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[12].FA                   ; work         ;
+;          |Full_Adder:adder_32[14].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[14].FA                   ; work         ;
+;          |Full_Adder:adder_32[15].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[15].FA                   ; work         ;
+;          |Full_Adder:adder_32[17].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[17].FA                   ; work         ;
+;          |Full_Adder:adder_32[18].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[18].FA                   ; work         ;
+;          |Full_Adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[1].FA                    ; work         ;
+;          |Full_Adder:adder_32[20].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[20].FA                   ; work         ;
+;          |Full_Adder:adder_32[21].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[21].FA                   ; work         ;
+;          |Full_Adder:adder_32[23].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[23].FA                   ; work         ;
+;          |Full_Adder:adder_32[24].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[24].FA                   ; work         ;
+;          |Full_Adder:adder_32[26].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[26].FA                   ; work         ;
+;          |Full_Adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[27].FA                   ; work         ;
+;          |Full_Adder:adder_32[29].FA|    ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[29].FA                   ; work         ;
+;          |Full_Adder:adder_32[2].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[2].FA                    ; work         ;
+;          |Full_Adder:adder_32[30].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[30].FA                   ; work         ;
+;          |Full_Adder:adder_32[3].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[3].FA                    ; work         ;
+;          |Full_Adder:adder_32[4].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[4].FA                    ; work         ;
+;          |Full_Adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[5].FA                    ; work         ;
+;          |Full_Adder:adder_32[6].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[6].FA                    ; work         ;
+;          |Full_Adder:adder_32[8].FA|     ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[8].FA                    ; work         ;
+;          |Full_Adder:adder_32[9].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|brc:brc_top|Add_Sub_32bit:subtractor|Full_Adder:adder_32[9].FA                    ; work         ;
+;    |control_unit:control_unit_top|       ; 51 (51)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|control_unit:control_unit_top                                                     ; work         ;
+;    |imm_gen:imm_gen_top|                 ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|imm_gen:imm_gen_top                                                               ; work         ;
+;    |inst_memory:inst_memory_top|         ; 153 (153)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|inst_memory:inst_memory_top                                                       ; work         ;
+;    |lsu:lsu_top|                         ; 5516 (0)          ; 65568 (0)     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|lsu:lsu_top                                                                       ; work         ;
+;       |data_memory:data_memory_lsu|      ; 5515 (5515)       ; 65568 (65568) ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|lsu:lsu_top|data_memory:data_memory_lsu                                           ; work         ;
+;       |load_unit:load_unit_lsu|          ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|lsu:lsu_top|load_unit:load_unit_lsu                                               ; work         ;
+;    |mux_2_1:mux2_1_asel_top|             ; 38 (38)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|mux_2_1:mux2_1_asel_top                                                           ; work         ;
+;    |mux_2_1:mux2_1_bsel_top|             ; 77 (77)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|mux_2_1:mux2_1_bsel_top                                                           ; work         ;
+;    |mux_2_1:mux2_1_pc_sel|               ; 14 (14)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|mux_2_1:mux2_1_pc_sel                                                             ; work         ;
+;    |mux_3_1:mux3_1_top_writeback|        ; 41076 (41076)     ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|mux_3_1:mux3_1_top_writeback                                                      ; work         ;
+;    |pc:pc_top|                           ; 64 (64)           ; 32 (32)       ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|pc:pc_top                                                                         ; work         ;
+;    |regfile:regfile_top|                 ; 1391 (1391)       ; 992 (992)     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |single_cycle|regfile:regfile_top                                                               ; work         ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                   ;
++----------------------------------------+---------------------------------------------+
+; Register name                          ; Reason for Removal                          ;
++----------------------------------------+---------------------------------------------+
+; regfile:regfile_top|Reg[0][0]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][3]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][1]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][2]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][4]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][5]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][6]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][7]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][8]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][9]          ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][10]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][11]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][12]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][13]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][14]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][15]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][16]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][17]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][18]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][19]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][20]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][21]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][22]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][23]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][24]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][25]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][26]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][27]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][28]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][29]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][30]         ; Stuck at GND due to stuck port clock_enable ;
+; regfile:regfile_top|Reg[0][31]         ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 32 ;                                             ;
++----------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                              ;
++--------------------------------+--------------------------------+----------------------------------------+
+; Register name                  ; Reason for Removal             ; Registers Removed due to This Register ;
++--------------------------------+--------------------------------+----------------------------------------+
+; regfile:regfile_top|Reg[0][13] ; Stuck at GND                   ; regfile:regfile_top|Reg[0][14]         ;
+;                                ; due to stuck port clock_enable ;                                        ;
++--------------------------------+--------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 66625 ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 16    ;
+; Number of registers using Asynchronous Clear ; 9216  ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 66562 ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------+
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |single_cycle|mux_2_1:mux2_1_bsel_top|data_out_o[9]         ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |single_cycle|mux_2_1:mux2_1_bsel_top|data_out_o[20]        ;
+; 64:1               ; 3 bits    ; 126 LEs       ; 15 LEs               ; 111 LEs                ; No         ; |single_cycle|control_unit:control_unit_top|Selector4       ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; No         ; |single_cycle|regfile:regfile_top|o_rs1_data[4]             ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; No         ; |single_cycle|regfile:regfile_top|o_rs2_data[22]            ;
+; 6:1                ; 8 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |single_cycle|mux_2_1:mux2_1_bsel_top|data_out_o[12]        ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; No         ; |single_cycle|mux_2_1:mux2_1_bsel_top|data_out_o[3]         ;
+; 14:1               ; 5 bits    ; 45 LEs        ; 35 LEs               ; 10 LEs                 ; No         ; |single_cycle|alu:alu_top|Mux9                              ;
+; 15:1               ; 7 bits    ; 70 LEs        ; 56 LEs               ; 14 LEs                 ; No         ; |single_cycle|alu:alu_top|Mux22                             ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 32 LEs               ; 8 LEs                  ; No         ; |single_cycle|alu:alu_top|Mux5                              ;
+; 16:1               ; 3 bits    ; 30 LEs        ; 24 LEs               ; 6 LEs                  ; No         ; |single_cycle|alu:alu_top|Mux25                             ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 18 LEs               ; 2 LEs                  ; No         ; |single_cycle|alu:alu_top|Mux2                              ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 16 LEs               ; 6 LEs                  ; No         ; |single_cycle|alu:alu_top|Mux28                             ;
+; 4096:1             ; 2 bits    ; 5460 LEs      ; 2732 LEs             ; 2728 LEs               ; No         ; |single_cycle|lsu:lsu_top|data_memory:data_memory_lsu|Mux24 ;
+; 4100:1             ; 7 bits    ; 19131 LEs     ; 9576 LEs             ; 9555 LEs               ; No         ; |single_cycle|mux_3_1:mux3_1_top_writeback|Mux27            ;
+; 4102:1             ; 16 bits   ; 43744 LEs     ; 21904 LEs            ; 21840 LEs              ; No         ; |single_cycle|mux_3_1:mux3_1_top_writeback|Mux0             ;
+; 4102:1             ; 7 bits    ; 19138 LEs     ; 9583 LEs             ; 9555 LEs               ; No         ; |single_cycle|mux_3_1:mux3_1_top_writeback|Mux18            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "control_unit:control_unit_top"                                                          ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; o_slt_sl ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "brc:brc_top|Add_Sub_32bit:subtractor" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; Sel  ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++-------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLTU_MODULE_inst" ;
++------+-------+----------+-----------------------------------------+
+; Port ; Type  ; Severity ; Details                                 ;
++------+-------+----------+-----------------------------------------+
+; Sel  ; Input ; Info     ; Stuck at VCC                            ;
++------+-------+----------+-----------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLT_MODULE_inst|Add_Sub_32bit:SUB"                                      ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                             ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; Sel           ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; Result[30..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_top|SLT_SLTU:SLT_MODULE_inst" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; Sel  ; Input ; Info     ; Stuck at GND                           ;
++------+-------+----------+----------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_top|Add_Sub_32bit:ADD_SUB_inst"                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Cout ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Add_Sub_32bit:pc_add4"                                                                                       ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; B[31..3] ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; B[1..0]  ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; B[2]     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; Sel      ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; Cout     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:04:49     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun Oct 12 21:38:50 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off single_cycle -c single_cycle
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 1 design units, including 1 entities, in source file single_cycle.sv
+    Info (12023): Found entity 1: single_cycle
+Info (12021): Found 7 design units, including 7 entities, in source file alu.sv
+    Info (12023): Found entity 1: alu
+    Info (12023): Found entity 2: Shift_Right_Logical
+    Info (12023): Found entity 3: Shift_Right_Arithmetic
+    Info (12023): Found entity 4: Shift_Left_Logical
+    Info (12023): Found entity 5: Add_Sub_32bit
+    Info (12023): Found entity 6: Full_Adder
+    Info (12023): Found entity 7: SLT_SLTU
+Info (12021): Found 1 design units, including 1 entities, in source file brc.sv
+    Info (12023): Found entity 1: brc
+Info (12021): Found 1 design units, including 1 entities, in source file control_unit.sv
+    Info (12023): Found entity 1: control_unit
+Info (12021): Found 1 design units, including 1 entities, in source file data_memory.sv
+    Info (12023): Found entity 1: data_memory
+Info (12021): Found 1 design units, including 1 entities, in source file imm_gen.sv
+    Info (12023): Found entity 1: imm_gen
+Info (12021): Found 1 design units, including 1 entities, in source file inst_memory.sv
+    Info (12023): Found entity 1: inst_memory
+Info (12021): Found 1 design units, including 1 entities, in source file load_unit.sv
+    Info (12023): Found entity 1: load_unit
+Info (12021): Found 7 design units, including 7 entities, in source file lsu.sv
+    Info (12023): Found entity 1: lsu
+    Info (12023): Found entity 2: lsu_2
+    Info (12023): Found entity 3: datamem
+    Info (12023): Found entity 4: demux_sel_mem
+    Info (12023): Found entity 5: output_buffer
+    Info (12023): Found entity 6: data_trsf
+    Info (12023): Found entity 7: mux_3_1_lsu
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2_1.sv
+    Info (12023): Found entity 1: mux_2_1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_3_1.sv
+    Info (12023): Found entity 1: mux_3_1
+Info (12021): Found 1 design units, including 1 entities, in source file pc.sv
+    Info (12023): Found entity 1: pc
+Info (12021): Found 1 design units, including 1 entities, in source file regfile.sv
+    Info (12023): Found entity 1: regfile
+Warning (10236): Verilog HDL Implicit Net warning at single_cycle.sv(140): created implicit net for "insn_vld"
+Info (12127): Elaborating entity "single_cycle" for the top level hierarchy
+Info (12128): Elaborating entity "pc" for hierarchy "pc:pc_top"
+Info (12128): Elaborating entity "Add_Sub_32bit" for hierarchy "Add_Sub_32bit:pc_add4"
+Info (12128): Elaborating entity "Full_Adder" for hierarchy "Add_Sub_32bit:pc_add4|Full_Adder:FA0"
+Info (12128): Elaborating entity "inst_memory" for hierarchy "inst_memory:inst_memory_top"
+Warning (10850): Verilog HDL warning at inst_memory.sv(8): number of words (57) in memory file does not match the number of elements in the address range [0:2048]
+Warning (10030): Net "imem.data_a" at inst_memory.sv(6) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "imem.waddr_a" at inst_memory.sv(6) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "imem.we_a" at inst_memory.sv(6) has no driver or initial value, using a default initial value '0'
+Info (12128): Elaborating entity "imm_gen" for hierarchy "imm_gen:imm_gen_top"
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_top"
+Info (12128): Elaborating entity "Shift_Left_Logical" for hierarchy "alu:alu_top|Shift_Left_Logical:SLL_inst"
+Info (12128): Elaborating entity "Shift_Right_Logical" for hierarchy "alu:alu_top|Shift_Right_Logical:SRL_inst"
+Info (12128): Elaborating entity "Shift_Right_Arithmetic" for hierarchy "alu:alu_top|Shift_Right_Arithmetic:SRA_inst"
+Info (12128): Elaborating entity "SLT_SLTU" for hierarchy "alu:alu_top|SLT_SLTU:SLT_MODULE_inst"
+Info (12128): Elaborating entity "lsu" for hierarchy "lsu:lsu_top"
+Info (12128): Elaborating entity "data_memory" for hierarchy "lsu:lsu_top|data_memory:data_memory_lsu"
+Info (12128): Elaborating entity "load_unit" for hierarchy "lsu:lsu_top|load_unit:load_unit_lsu"
+Info (12128): Elaborating entity "mux_3_1" for hierarchy "mux_3_1:mux3_1_top_writeback"
+Info (12128): Elaborating entity "brc" for hierarchy "brc:brc_top"
+Info (12128): Elaborating entity "control_unit" for hierarchy "control_unit:control_unit_top"
+Info (12128): Elaborating entity "regfile" for hierarchy "regfile:regfile_top"
+Info (12128): Elaborating entity "mux_2_1" for hierarchy "mux_2_1:mux2_1_asel_top"
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[0]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[1]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[2]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[3]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[4]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[5]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[6]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[7]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[8]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[9]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[10]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[11]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[12]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[13]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[14]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[15]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[16]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[17]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[18]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[19]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[20]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[21]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[22]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[23]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[24]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[25]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[26]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[27]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[28]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[29]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[30]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "alu:alu_top|o_alu_data[31]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[0]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[1]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[2]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[3]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[4]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[5]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[6]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[7]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[8]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[9]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[10]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[11]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[12]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[13]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[14]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[15]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[16]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[17]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[18]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[19]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[20]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[21]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[22]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[23]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[24]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[25]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[26]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[27]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[28]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[29]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[30]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "imm_gen:imm_gen_top|o_imm_out[31]" feeding internal logic into a wire
+Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (2049) in the Memory Initialization File "D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/db/single_cycle.ram0_inst_memory_38b34dae.hdl.mif" -- setting initial value for remaining addresses to 0
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/db/single_cycle.ram0_inst_memory_38b34dae.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/output_files/single_cycle.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 115725 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 33 output pins
+    Info (21061): Implemented 115690 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 74 warnings
+    Info: Peak virtual memory: 5213 megabytes
+    Info: Processing ended: Sun Oct 12 21:44:03 2025
+    Info: Elapsed time: 00:05:13
+    Info: Total CPU time (on all processors): 00:05:09
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/output_files/single_cycle.map.smsg.
+
+

@@ -1,0 +1,94 @@
+MAIN:   
+   lui     x1, 0x12348         # x1 = 0x12345000
+    auipc   x2, 0x00001         # x2 = PC + 0x1000
+    addi    x3, x1, 8          # x3 = x1 + 10
+    add     x4, x1, x2          # x4 = x1 + x2
+    sub     x5, x1, x2          # x5 = x1 - x2
+    sll     x6, x1, x3          # x6 = x1 << x3
+    slt     x7, x1, x2          # x7 = (x1 < x2) signed
+    sltu    x8, x1, x2          # x8 = (x1 < x2) unsigned
+    xor     x9, x1, x2          # x9 = x1 ^ x2
+    srl     x10, x1, x3         # x10 = x1 >> x3 (logical)
+    sra     x11, x1, x3         # x11 = x1 >> x3 (arithmetic)
+    or      x12, x1, x2         # x12 = x1 | x2
+    and     x13, x1, x2         # x13 = x1 & x2
+    addi    x13, x0, 0x100
+    
+    sw      x3, 0(x13)           # store x1 → mem[0]
+    lw      x14, 2(x13)          # load  mem[0] → x14
+    lb      x15, 2(x13)          # load byte (signed)
+    lbu     x16, 2(x13)          # load byte (unsigned)
+    lh      x17, 2(x13)          # load half (signed)
+    lhu     x18, 2(x13)          # load half (unsigned)
+
+# ----- TEST BEQ / BNE -----
+
+    beq x1, x2, EQ     # x1 != x2 nên KHÔNG nhảy
+    addi x3, x3, 1     # x3 = 1 → không nhảy
+    bne x1, x2, NEQ    # x1 != x2 nên NHẢY
+    addi x3, x3, 2     # dòng này bị bỏ qua
+
+EQ:
+    addi x4, x0, 0x44  # EQ: x4 = 0x44 (chỉ để thấy nhảy)
+    j NEXT1
+
+NEQ:
+    addi x4, x0, 0x55  # NEQ: x4 = 0x55 (đúng)
+NEXT1:
+
+    # ----- TEST BLT / BGE -----
+    blt x1, x2, LESS    # 10 < 20 → nhảy
+    addi x3, x3, 3      # bỏ qua
+    bge x1, x2, GREAT   # không nhảy
+    addi x3, x3, 4
+    j NEXT2
+
+LESS:
+    addi x5, x0, 0x11   # x5 = 0x11 (nhảy đúng)
+    j NEXT2
+
+GREAT:
+    addi x5, x0, 0x22   # x5 = 0x22 (nếu nhảy)
+NEXT2:
+
+    # ----- TEST BLTU / BGEU -----
+    li x1, -1           # x1 = 0xFFFFFFFF (lớn unsigned)
+    li x2, 1
+    bltu x1, x2, ULESS  # unsigned: 0xFFFFFFFF < 1 ? KHÔNG → không nhảy
+    addi x6, x0, 0x66   # x6 = 0x66
+    bgeu x1, x2, UGEQ   # 0xFFFFFFFF >= 1 → nhảy
+    addi x6, x6, 1
+    j NEXT3
+
+ULESS:
+    addi x6, x0, 0x77
+    j NEXT3
+
+UGEQ:
+    addi x6, x0, 0x88
+NEXT3:
+
+    # ----- TEST JAL -----
+    jal x19, JUMPED     # nhảy đến nhãn JUMPED, lưu địa chỉ trở về vào x19
+    addi x7, x0, 0x99   # không chạy vì đã nhảy
+
+JUMPED:
+    addi x7, x0, 0xAA   # đánh dấu là JAL thành công
+    jal x0, NEXT4       # nhảy mà không lưu địa chỉ
+
+NEXT4:
+    # ----- TEST JALR -----
+    la x1, TARGET        # x1 = địa chỉ TARGET
+    jalr x20, x1, 0      # nhảy đến TARGET, lưu return addr vào x20
+    addi x8, x0, 0xEE    # không chạy
+
+TARGET:
+    addi x8, x0, 0xDD    # chạy → JALR ok
+
+    # ----- DỪNG -----
+END:
+    nop
+    nop
+    nop
+    j MAIN
+
