@@ -1,4 +1,4 @@
-//`include "Shift_Left_Logical.sv"
+//`include "shift_left_logical.sv"
 module alu(
 	//  input
 	input  logic  [31:0]  i_operand_a,
@@ -12,39 +12,39 @@ module alu(
 
     // Instance các module cần dùng
 	 // ADD, SUB
-    Add_Sub_32bit ADD_SUB_inst( 
+    add_sub_32_bit add_sub_alu( 
 	 .A(i_operand_a),
 	 .B(i_operand_b),
 	 .Sel(i_alu_op[3]),
 	 .Result(add_sub_out)); 
 	 
 	 // SLL
-    Shift_Left_Logical SLL_inst(
+    shift_left_logical sll_alu(
 	 .data_in(i_operand_a),
 	 .shift_amt(i_operand_b[4:0]),
 	 .data_out(sll_out)); // SLL
 
 	 // SRL
-    Shift_Right_Logical SRL_inst(
+    shift_right_logical srl_alu(
 	 .data_in(i_operand_a), 
 	 .shift_amt(i_operand_b[4:0]),
 	 .data_out(srl_out)); 
 	 
 	 // SRA
-    Shift_Right_Arithmetic SRA_inst(
+    shift_right_arithmetic sra_alu(
 	 .data_in(i_operand_a), 
 	 .shift_amt(i_operand_b[4:0]),
 	 .data_out(sra_out)); 
 	 
 	 // SLT
-    SLT_SLTU SLT_MODULE_inst(
+    slt_stlu slt_alu(
 	 .A(i_operand_a), 
 	 .B(i_operand_b), 
 	 .Sel(1'b0),
 	 .Result(slt_out));  
 	 
 	 // SLT
-    SLT_SLTU SLTU_MODULE_inst(
+    slt_stlu sltu_alu(
 	 .A(i_operand_a),
 	 .B(i_operand_b), 
 	 .Sel(1'b1), 
@@ -68,7 +68,7 @@ module alu(
     end
 endmodule
 
-module Shift_Right_Logical (
+module shift_right_logical (
     input  logic [31:0] data_in,   // Data
     input  logic [4:0]  shift_amt, // Số bit cần dịch
     output logic [31:0] data_out);   // Kết quả 
@@ -114,7 +114,7 @@ module Shift_Right_Logical (
 
 endmodule
 
-module Shift_Right_Arithmetic (
+module shift_right_arithmetic (
     input  logic [31:0] data_in, // Data
     input  logic [4:0] shift_amt, // Số bit cần dịch
     output logic [31:0] data_out); //Kết quả
@@ -158,7 +158,7 @@ module Shift_Right_Arithmetic (
     end
 endmodule
 
-module Shift_Left_Logical (
+module shift_left_logical (
     input  logic [31:0] data_in,   // Data
     input  logic [4:0]  shift_amt, // Số bit cần dịch
     output logic [31:0] data_out);   // Kết quả
@@ -204,7 +204,7 @@ module Shift_Left_Logical (
 
 endmodule
 
-module Add_Sub_32bit (
+module add_sub_32_bit (
     input  logic [31:0] A, B,  // Input A, B
     input  logic Sel,          // 0 = ADD, 1 = SUB
     output logic [31:0] Result,// Kết quả phép cộng 
@@ -247,7 +247,7 @@ module Full_Adder (
 
 endmodule
 	
-module SLT_SLTU (
+module slt_stlu (
     input  logic [31:0] A, B,  // Input A, B
     input  logic Sel,          // 0 = SLT (có dấu), 1 = SLTU (không dấu)
     output logic [31:0] Result); // Kết quả
@@ -255,7 +255,7 @@ module SLT_SLTU (
     logic [31:0] diff_out;  // Kết quả phép trừ A - B
     logic carry_out;        // Carry/Borrow từ phép trừ
 
-    Add_Sub_32bit SUB(
+    add_sub_32_bit SUB(
         .A(A),
         .B(B), 
         .Sel(1'b1), 
@@ -266,9 +266,9 @@ module SLT_SLTU (
     // So sánh
     always @(*) begin
         if (Sel == 1'b0) begin // SLT
-            Result = diff_out[31];  
+            Result = {31'd0,diff_out[31]};  
         end else begin //SLTU
-            Result = ~carry_out;
+            Result = {31'd0,~carry_out};
         end
     end
 

@@ -11,7 +11,7 @@ module mux_3_1 (
       2'b00 : data_out_o = data_0_i;
       2'b01 : data_out_o = data_1_i;
       2'b10 : data_out_o = data_2_i;
-      default : data_out_o = 32'bz;		
+      default : data_out_o = 32'b0;		
     endcase
   end
 endmodule

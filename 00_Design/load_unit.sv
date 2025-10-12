@@ -6,8 +6,8 @@ module load_unit(
 	 
     always @(*) begin
         case (i_load_type)
-            3'b000: o_load_result = {{24{i_load_data[7]}}, i_load_data[7:0]};  // Load byte mở rộng dấu
-            3'b001: o_load_result = {{16{i_load_data[15]}}, i_load_data[15:0]}; // Load haftword mở rộng dấu
+            3'b000: o_load_result = {{24{i_load_data[7]}}, i_load_data[7:0]};  // LB
+            3'b001: o_load_result = {{16{i_load_data[15]}}, i_load_data[15:0]}; // LH
             3'b010: o_load_result = i_load_data;  // LW 
             3'b100: o_load_result = {24'b0, i_load_data[7:0]};  // LBU 
             3'b101: o_load_result = {16'b0, i_load_data[15:0]}; // LHU 

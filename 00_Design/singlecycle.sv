@@ -93,7 +93,7 @@ module singlecycle(
         .o_pc_data_out(pc_data_out)
         );
 
-    Add_Sub_32bit pc_add4 (
+    add_sub_32_bit pc_add4 (
         .A(pc_data_out),
         .B(32'd4),
         .Sel(1'b0),
@@ -153,7 +153,7 @@ module singlecycle(
         .o_bsel(bsel),
         .o_alu_op(alu_op),
         .o_wren(wren),
-        .o_slt_sl(slt_sl)
+        .o_slt_sl(slt_sl),
         .o_load_type(load_type),
         .o_wb_sel(wb_sel)
     );
@@ -190,8 +190,14 @@ module singlecycle(
         .sel_i(pc_sel),
         .data_out_o(pc_data_in));
 
-    always_ff @( posedge i_clk ) begin
-        o_insn_vld <= insn_vld;
-        o_pc_debug <= pc_data_out;
+    always_ff @( posedge i_clk or posedge i_reset ) begin
+        if(i_reset) begin    
+            o_insn_vld <= insn_vld;
+            o_pc_debug <= 32'b0;
+        end
+        else begin
+            o_insn_vld <= insn_vld;
+            o_pc_debug <= pc_data_out;
+        end
     end
 endmodule

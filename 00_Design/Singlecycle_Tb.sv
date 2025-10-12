@@ -1,4 +1,5 @@
 `include "singlecycle.sv"
+`timescale 1ps/1ps
 module Singlecycle_Tb();
 
     logic clk;
@@ -12,13 +13,12 @@ module Singlecycle_Tb();
     always #5 clk = ~clk;
 	
     initial begin
-        $dumpfile("wave.vcd");      // ✅ tên file VCD sẽ sinh ra
-        $dumpvars(0, Singlecycle_Tb); // ✅ tên module testbench top-level
-        //force singlecycle_test_top.regfile_top.i_rd_wren = 1'b1;
+        $dumpfile("wave.vcd");      // file VCD sẽ sinh ra
+        $dumpvars(0, Singlecycle_Tb); //tên module testbench top-level
         clk = 0;
         reset = 1;    // Reset để PC = 0
-        #3;reset = 0; 
-        #500;
+        #3ps;reset = 0; 
+        #1000ps;
         $finish;  
     end
 endmodule

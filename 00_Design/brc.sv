@@ -9,9 +9,9 @@ module  brc (
 	output  logic  o_br_equal
 );
  logic [31:0] Diff;  // Kết quả phép trừ rs1 - rs2
-    logic Cout;         // Carry-out từ Add_Sub_32bit
+    logic Cout;         // Carry-out từ add_sub_32_bit
 
-    Add_Sub_32bit subtractor (
+    add_sub_32_bit subtractor (
         .A(i_rs1_data),
         .B(i_rs2_data),
         .Sel(1'b1),   // SUB

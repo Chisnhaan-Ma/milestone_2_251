@@ -9,7 +9,7 @@ module mux_2_1 (
     case (sel_i)
       1'b0 : data_out_o = data_0_i;
       1'b1 : data_out_o = data_1_i;
-      default: data_out_o = 32'bz;
+      default: data_out_o = 32'b0;
     endcase
   end
 endmodule 
