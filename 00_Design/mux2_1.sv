@@ -1,3 +1,5 @@
+`ifndef MUX_2_1
+`define MUX_2_1
 module mux_2_1 (
   input logic [31:0] data_1_i    ,
   input logic [31:0] data_0_i    ,
@@ -13,3 +15,4 @@ module mux_2_1 (
     endcase
   end
 endmodule 
+`endif

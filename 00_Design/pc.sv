@@ -1,3 +1,5 @@
+`ifndef PC
+`define PC
 /////////Program Counter//////////////////////
 module pc (
   input logic i_clk,
@@ -12,3 +14,4 @@ module pc (
       o_pc_data_out <= i_pc_data_in;
   end
 endmodule
+`endif

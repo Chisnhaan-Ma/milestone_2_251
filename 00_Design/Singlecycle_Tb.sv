@@ -1,3 +1,5 @@
+`ifndef SINGLE_CYCLE_TB
+`define SINGLE_CYCLE_TB
 `include "singlecycle.sv"
 `timescale 1ps/1ps
 module Singlecycle_Tb();
@@ -22,3 +24,4 @@ module Singlecycle_Tb();
         $finish;  
     end
 endmodule
+`endif

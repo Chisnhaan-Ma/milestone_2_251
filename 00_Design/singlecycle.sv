@@ -1,3 +1,7 @@
+`ifndef SINGLE_CYCLE
+`define SINGLE_CYCLE
+
+`include "alu.sv"
 `include "brc.sv"
 `include "control_unit.sv"
 `include "imm_gen.sv"
@@ -201,3 +205,4 @@ module singlecycle(
         end
     end
 endmodule
+`endif

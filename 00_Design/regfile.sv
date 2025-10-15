@@ -1,3 +1,5 @@
+`ifndef REGFILE
+`define REGFILE
 module regfile (
   input  logic        i_clk,
   input  logic        i_reset,
@@ -33,3 +35,4 @@ module regfile (
   assign o_rs2_data = (i_rs2_addr == 5'd0) ? 32'h0 : Reg[i_rs2_addr];
 
 endmodule
+`endif

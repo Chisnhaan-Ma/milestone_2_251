@@ -1,4 +1,6 @@
-`include "alu.sv"
+`ifndef BRC
+`define BRC
+`include "add_sub_32_bit.sv"
 module  brc (
 	//  input
 	input  logic  [31:0]  i_rs1_data,
@@ -36,3 +38,4 @@ module  brc (
     end
 
 endmodule
+`endif 

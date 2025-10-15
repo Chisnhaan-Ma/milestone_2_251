@@ -1,3 +1,5 @@
+`ifndef CONTROL_UNIT
+`define CONTROL_UNIT
 ///Control Unit//////
 module control_unit(
 	input logic [31:0]i_inst,
@@ -238,3 +240,4 @@ module control_unit(
 		endcase
 	end
 endmodule
+`endif

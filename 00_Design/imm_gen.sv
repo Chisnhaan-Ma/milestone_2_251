@@ -1,3 +1,5 @@
+`ifndef IMM_GEN
+`define IMM_GEN
 /////////Immediate generator///////////////
 module imm_gen(	
 	input logic [2:0] i_imm_sel, // Chọn kiểu generate
@@ -33,3 +35,4 @@ always @(*) begin
 	endcase
 end
 endmodule
+`endif

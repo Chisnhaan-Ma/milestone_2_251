@@ -1,3 +1,5 @@
+`ifndef LOAD_UNIT
+`define LOAD_UNIT
 ////////Load Encoding/////
 module load_unit(
     input  logic [31:0] i_load_data, // Data từ DMEM
@@ -16,3 +18,4 @@ module load_unit(
     end
 
 endmodule
+`endif

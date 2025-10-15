@@ -1,3 +1,5 @@
+`ifndef INST_MEMORY
+`define INST_MEMORY
 module inst_memory (
   output logic [31:0] o_rdata,
   input  logic [31:0] i_addr
@@ -11,3 +13,4 @@ module inst_memory (
       o_rdata = imem[i_addr[31:2]];  
   end
 endmodule
+`endif

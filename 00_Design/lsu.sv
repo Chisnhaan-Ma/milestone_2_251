@@ -1,3 +1,5 @@
+`ifndef LSU
+`define LSU
 `include "data_memory.sv"
 `include "load_unit.sv"
 `include "mux3_1.sv"
@@ -28,9 +30,8 @@ module lsu(
         .i_load_data(data_read_mem),
         .i_load_type(i_load_type),
         .o_load_result(o_load_result));
-
-
 endmodule
+`endif
 
 module lsu_2(
   //input

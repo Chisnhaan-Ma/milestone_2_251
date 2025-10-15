@@ -1,3 +1,5 @@
+`ifndef DATA_MEMORY
+`define DATA_MEMORY
 module data_memory(
     /////////- input -///////////
     input   logic       i_clk,
@@ -28,3 +30,4 @@ module data_memory(
 
 
 endmodule
+`endif
