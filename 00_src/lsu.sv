@@ -1,6 +1,11 @@
+`ifndef LSU
+`define LSU
 `include "data_memory.sv"
 `include "load_unit.sv"
 `include "mux3_1.sv"
+/*------------------------------------------------------------*/
+
+
 /*------------------------------------------------------------*/
 
 module lsu (
@@ -113,7 +118,7 @@ module datamem (
   input logic [31:0] i_data,
   output logic [31:0] o_data
 );
-  logic [31:0] data_mem [512:0];
+  logic [31:0] data_mem [2047:0];
   logic [31:0] data_bs,data_tmp;
 
   data_trsf trsf_st (
@@ -133,8 +138,8 @@ module datamem (
 
   always_ff @(posedge i_clk or posedge i_reset) begin
     if (i_reset) begin
-      for (int i=0;i<512; i++) begin
-        data_mem[i_addr[10:2]] <= 0;
+      for (int i=0;i<2048; i++) begin
+        data_mem[i] <= 0;
       end
     end
     else if (i_enb) begin
@@ -290,7 +295,7 @@ module  data_trsf
       end
       2'b01: begin
       memb_tmp = (data_bs & 32'h0000ff00);
-      memh_tmp = (data_bs & 32'h00ffff00);
+      memh_tmp = (data_bs & 32'h0000ffff);
       end
       2'b10: begin
       memb_tmp = (data_bs & 32'h00ff0000);
@@ -298,7 +303,7 @@ module  data_trsf
       end
       2'b11: begin
       memb_tmp = (data_bs & 32'hff000000);
-      memh_tmp = (data_bs & 32'hff000000);
+      memh_tmp = (data_bs & 32'hffff0000);
       end
     endcase
   end
@@ -309,18 +314,18 @@ module  data_trsf
         SW: data_af = data_bf;
         SB: begin
           case(addr_sp)
-            2'b00: data_af = (data_bf & 32'h000000ff) | (data_bs & 32'hffffff00);
-            2'b01: data_af = ((data_bf & 32'h000000ff) << 8) | (data_bs & 32'hffff00ff);
-            2'b10: data_af = ((data_bf & 32'h000000ff) << 16)| (data_bs & 32'hff00ffff);
-            2'b11: data_af = ((data_bf & 32'h000000ff) << 24)| (data_bs & 32'h00ffffff);
+            2'b00: data_af = {data_bs[31:8],data_bf[7:0]};               //(data_bf & 32'h000000ff) | (data_bs & 32'hffffff00);
+            2'b01: data_af = {data_bs[31:16],data_bf[7:0],data_bs[7:0]}; //((data_bf & 32'h000000ff) << 8) | (data_bs & 32'hffff00ff);
+            2'b10: data_af = {data_bs[31:24],data_bf[7:0],data_bs[15:0]};//((data_bf & 32'h000000ff) << 16)| (data_bs & 32'hff00ffff);
+            2'b11: data_af = {data_bf[7:0],data_bs[23:0]};               //((data_bf & 32'h000000ff) << 24)| (data_bs & 32'h00ffffff);
           endcase
         end
         SH: begin
           case (addr_sp)
-            2'b00: data_af = (data_bf & 32'h0000ffff) | (data_bs & 32'hffff0000); 
-            2'b01: data_af = ((data_bf & 32'h0000ffff) << 8) | (data_bs & 32'hff0000ff); 
-            2'b10: data_af = ((data_bf & 32'h0000ffff) << 16) | (data_bs & 32'hffff0000);
-            2'b11: data_af = ((data_bf & 32'h0000ffff) << 24) | (data_bs & 32'hffff0000); 
+            2'b00: data_af = {data_bs[31:16],data_bf[15:0]};  //(data_bf & 32'h0000ffff) | (data_bs & 32'hffff0000); 
+            2'b01: data_af = {data_bs[31:16],data_bf[15:0]};  //((data_bf & 32'h0000ffff)) | (data_bs & 32'hffff0000); 
+            2'b10: data_af = {data_bf[15:0], data_bs[15:0]};  //((data_bf & 32'h0000ffff) << 16) | (data_bs & 32'h0000ffff);
+            2'b11: data_af = {data_bf[15:0], data_bs[15:0]};  //((data_bf & 32'h0000ffff) << 16)  | (data_bs & 32'h0000ffff); 
           endcase 
         end
         default: data_af = data_bf;
@@ -332,28 +337,47 @@ module  data_trsf
       LBU: begin
         case (addr_sp) 
           2'b00: data_af = memb_tmp;
-          2'b01: data_af =  (memb_tmp >>8);
-          2'b10: data_af = (memb_tmp >>16);
-          2'b11: data_af =  (memb_tmp >>24);
+          2'b01: data_af = {8'b0, memb_tmp[31:8]};  //(memb_tmp >>8);
+          2'b10: data_af = {16'b0,memb_tmp[31:16]}; //(memb_tmp >>16);
+          2'b11: data_af = {23'b0,memb_tmp[31:24]}; //(memb_tmp >>24);
         endcase
       end
-      LHU: data_af = memh_tmp;
-      LB: begin
+      LHU: begin
         case(addr_sp)
+          2'b00: data_af = memh_tmp;
+          2'b01: data_af = memh_tmp;
+          2'b10: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
+          2'b11: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
+        endcase
+      end
+      LB: begin
+        case (addr_sp)
+          2'b00: data_af = (memb_tmp[7])  ? {24'hffffff, memb_tmp[7:0]}   : {24'h000000, memb_tmp[7:0]};
+          2'b01: data_af = (memb_tmp[15]) ? {24'hffffff, memb_tmp[15:8]}  : {24'h000000, memb_tmp[15:8]};
+          2'b10: data_af = (memb_tmp[23]) ? {24'hffffff, memb_tmp[23:16]} : {24'h000000, memb_tmp[23:16]};
+          2'b11: data_af = (memb_tmp[31]) ? {24'hffffff, memb_tmp[31:24]} : {24'h000000, memb_tmp[31:24]};
+        endcase
+        /*case(addr_sp)
           2'b00: data_af = (memb_tmp[7] == 1) ? (memb_tmp | 32'hffffff00): memb_tmp;
           2'b01: data_af = (memb_tmp[15] == 1)? ((memb_tmp >> 8) | 32'hffffff00) : (memb_tmp >>8);
           2'b10: data_af = (memb_tmp[23] == 1)? ((memb_tmp >> 16) | 32'hffffff00) : (memb_tmp >>16);
           2'b11: data_af = (memb_tmp[31] == 1)? ((memb_tmp >> 24) | 32'hffffff00) : (memb_tmp >>24);
-        endcase
+        endcase*/
       end
       
       LH: begin
-        case(addr_sp)
-          2'b00: data_af = (memb_tmp[15] == 1)? (memb_tmp | 32'hffff0000): memb_tmp;
-          2'b01: data_af = (memb_tmp[23] == 1)? ((memb_tmp >> 8) | 32'hffff0000) : (memb_tmp >>8);
-          2'b10: data_af = (memb_tmp[31] == 1)?((memb_tmp >> 16) | 32'hffff0000) : (memb_tmp >>16);
-          2'b11: data_af = memb_tmp >> 24;
+        case (addr_sp)
+          2'b00: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
+          2'b01: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
+          2'b10: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
+          2'b11: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
         endcase
+        /*case(addr_sp)
+          2'b00: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
+          2'b01: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
+          2'b10: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
+          2'b11: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
+        endcase*/
       end
       default: data_af = 32'h00000000;
       endcase
@@ -393,4 +417,6 @@ module mux_3_1_lsu(
 endmodule
 
 /*------------------------------------------------------------*/
+`endif
+
 
