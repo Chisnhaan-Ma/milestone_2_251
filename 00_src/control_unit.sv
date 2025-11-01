@@ -3,11 +3,11 @@
 ///Control Unit//////
 module control_unit(
 	input logic [31:0]i_inst,
-	input logic i_br_equal,
-	input logic i_br_less,
+	//input logic i_br_equal,
+	//input logic i_br_less,
 
 	output logic o_inst_vld_ctrl,
-	output logic o_pc_sel,
+	//output logic o_pc_sel,
 	output logic [2:0]o_imm_sel,
 	output logic o_rd_wren,
 	output logic o_br_un,
@@ -16,7 +16,7 @@ module control_unit(
 	output logic [3:0]o_alu_op,
 	output logic o_wren,
 	output logic [2:0] o_slt_sl,
-	output logic [2:0]o_load_type,
+	//output logic [2:0]o_load_type,
 	output logic [1:0]o_wb_sel);
 	
 	logic [6:0] opcode;
@@ -28,7 +28,7 @@ module control_unit(
 	
     always @(*) begin
     	// Giá trị mặc định
-        o_pc_sel   = 1'b0;
+        //o_pc_sel   = 1'b0;
         o_imm_sel = 3'b000;
 		o_rd_wren  = 1'b0;
         o_br_un    = 1'b0;
@@ -37,7 +37,7 @@ module control_unit(
         o_alu_op = 4'b0000;
         o_wren   = 1'b0;
         o_wb_sel   = 2'b00;
-		o_load_type = 3'b0;
+		//o_load_type = 3'b0;
 		o_slt_sl = 3'b0;
 		case (opcode)
 			7'b0110011: begin  // R-type 
@@ -46,7 +46,7 @@ module control_unit(
 				o_wb_sel   = 2'b1;// chọn write back từ ngõ ra ALU
 				o_asel    = 1'b0;// chọn A từ rs1
 				o_bsel    = 1'b0;//chọn B từ rs2s
-				o_load_type = 3'b0; //không load
+				//o_load_type = 3'b0; //không load
 				o_imm_sel = 3'b000;// Imm_Gen theo I type
 				o_br_un    = 1'b0;
 				o_wren   = 1'b0;
@@ -77,7 +77,7 @@ module control_unit(
 				o_bsel    = 1'b1;//chọn B từ rs2
 				o_imm_sel = 3'b000;// Imm_Gen theo I type
 				o_wren   = 1'b0;	// Cho phép đọc đọc DMEM
-				o_load_type = 3'b0; // không load
+				//o_load_type = 3'b0; // không load
 				o_br_un    = 1'b0;
 				case(funct3)
 					3'b000: o_alu_op = 4'b0000; // ADDI
@@ -114,7 +114,7 @@ module control_unit(
 					3'b101: o_slt_sl = 3'b111; // lhu	
 					default: begin
 						o_inst_vld_ctrl =  1'b0;
-						o_load_type = 3'bz;
+						//o_load_type = 3'bz;
 						o_slt_sl = 3'b101; 
 					end
 				endcase
@@ -129,7 +129,7 @@ module control_unit(
 				o_wren = 1'b1; //cho phép đọc và ghi DMEM
 				o_alu_op = 4'b0000;	// Thực hiện phép cộng
 				o_wb_sel = 2'b11; //write back là tùy định vì không ghi ngược lại vào regfile
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_br_un    = 1'b0;
 				case (funct3)
 					3'b000: o_slt_sl = 3'b000; // sb
@@ -151,8 +151,9 @@ module control_unit(
 				o_alu_op = 4'b0000;	//ALU thực hiện phép cộng
 				o_wren = 1'b0;	// Cho phép đọc DMEM
 				o_wb_sel = 2'b11; // write back là tùy định vì không ghi ngược lại vào regfile
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_slt_sl = 3'b0;
+				/*
 				case(funct3)
 					3'b000: begin o_br_un = 1'b1; o_pc_sel = i_br_equal;	end//BEQ
 					3'b001: begin o_br_un = 1'b1; o_pc_sel = ~i_br_equal;	end//BNE
@@ -165,11 +166,12 @@ module control_unit(
 						o_inst_vld_ctrl =  1'b0;
 					end
 				endcase
+				*/
 			end
 			
 			7'b1101111: begin // J-type JAL
 				o_inst_vld_ctrl = 1'b1; 
-				o_pc_sel = 1'b1;	//o_pc_sel chọn luôn nhảy
+				//o_pc_sel = 1'b1;	//o_pc_sel chọn luôn nhảy
 				o_imm_sel = 3'b011; // Imm_Gen theo J Type
 				o_rd_wren = 1'b1;	// cho phép ghi ngược vào regfile
 				o_bsel = 1'b1;	// B chọn Imm_Gen theo J type
@@ -177,14 +179,14 @@ module control_unit(
 				o_alu_op = 4'b0000;	// ALU thực hiện phép cộng
 				o_wren = 1'b0;	// Cho phép đọc DMEM
 				o_wb_sel = 2'b10;	// Write back chọn PC+4 để return
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_br_un    = 1'b0;
 				o_slt_sl = 3'b000;
 			end
 			
 			7'b1100111: begin // I-type JALR
 				o_inst_vld_ctrl = 1'b1; 
-				o_pc_sel = 1'b1;	//o_pc_sel chọn luôn nhảy
+				//o_pc_sel = 1'b1;	//o_pc_sel chọn luôn nhảy
 				o_imm_sel = 3'b000; // Imm_Gen theo I Type
 				o_rd_wren = 1'b1;	// cho phép ghi ngược vào regfile
 				o_bsel = 1'b1;	// B chọn Imm_Gen theo I type
@@ -192,13 +194,13 @@ module control_unit(
 				o_alu_op = 4'b0000;	// ALU thực hiện phép cộng
 				o_wren = 1'b0;	// Cho phép đọc DMEM
 				o_wb_sel = 2'b10; // Write back chọn PC+4 để return
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_br_un    = 1'b0;
 				o_slt_sl = 3'b000;
 			end
 			7'b0110111: begin // U-type LUI
 				o_inst_vld_ctrl = 1'b1; 
-				o_pc_sel = 1'b0;	// o_pc_sel chọn không nhảy
+				//o_pc_sel = 1'b0;	// o_pc_sel chọn không nhảy
 				o_imm_sel = 3'b100; //Imm_Gen theo U type LUI
 				o_rd_wren = 1'b1; //cho phép ghi vào reg file
 				o_bsel = 1'b1;	// B chọn Imm_Gen theo U type LUI
@@ -206,13 +208,13 @@ module control_unit(
 				o_alu_op = 4'b1111; //ALU dẫn B ra ALU_out
 				o_wren = 1'b0; // Cho phép đọc DMEM
 				o_wb_sel = 2'b01; // chọn write back từ ALU_out
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_br_un    = 1'b0;
 				o_slt_sl = 3'b000;
 			end
 			7'b0010111: begin // U-type AUIPC
 				o_inst_vld_ctrl = 1'b1; 
-				o_pc_sel = 1'b0;	// o_pc_sel chọn không nhảy
+				//o_pc_sel = 1'b0;	// o_pc_sel chọn không nhảy
 				o_imm_sel = 3'b101; //Imm_Gen theo U type AUIPC
 				o_rd_wren = 1'b1; //cho phép ghi vào reg file
 				o_bsel = 1'b1;	// B chọn Imm_Gen theo U type LUI
@@ -220,13 +222,13 @@ module control_unit(
 				o_alu_op = 4'b0000; //ALU thực hiện phép cộng
 				o_wren = 1'b0; // Cho phép đọc DMEM
 				o_wb_sel = 2'b01; // chọn write back từ ALU_out
-				o_load_type = 3'b000; 
+				//o_load_type = 3'b000; 
 				o_br_un    = 1'b0;
 				o_slt_sl = 3'b000;
 			end
 			default begin
 				o_inst_vld_ctrl = 1'b0;
-				o_pc_sel   = 1'b0;
+				//o_pc_sel   = 1'b0;
 				o_imm_sel = 3'b000;
 				o_rd_wren  = 1'b0;
 				o_br_un    = 1'b0;
@@ -235,7 +237,7 @@ module control_unit(
 				o_alu_op = 4'b0000;
 				o_wren   = 1'b0;
 				o_wb_sel   = 2'b00;
-				o_load_type = 3'b000;
+				//o_load_type = 3'b000;
 				o_slt_sl = 3'b000; 
 			end
 		endcase
