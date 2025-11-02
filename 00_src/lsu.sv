@@ -163,6 +163,8 @@ module demux_sel_mem (
   parameter END_OP_BF = 32'h1000_5000;
 
   always @(*) begin
+    en_datamem = 1'b0;
+    en_op_buf = 1'b0;
     if ((i_lsu_addr >= START_DATAMEM) && (i_lsu_addr < END_DATAMEM)) begin
       en_datamem = 1'b1;
       en_op_buf = 1'b0;
@@ -232,6 +234,7 @@ module output_buffer(
   );
 
   always @(*) begin
+    data_bs = 32'h0;
     case(addr_2_i[15:12])
       4'h0: data_bs = MEMBF[0]; // LED Red
       4'h1: data_bs = MEMBF[1]; // led green
@@ -244,11 +247,11 @@ module output_buffer(
 
   always_ff @(posedge i_clk or posedge i_reset) begin
     if (i_reset) begin
-      MEMBF[0] <= '0;
-      MEMBF[1] <= '0;
-      MEMBF[2] <= '0;
-      MEMBF[3] <= '0;
-      MEMBF[4] <= '0;
+      MEMBF[0] <= 32'h0;
+      MEMBF[1] <= 32'h0;
+      MEMBF[2] <= 32'h0;
+      MEMBF[3] <= 32'h0;
+      MEMBF[4] <= 32'h0;
     end
     else if (en_bf) begin
       if (st_en_2_i) begin
@@ -288,6 +291,8 @@ module  data_trsf
   logic [31:0] memb_tmp,memh_tmp;
 
   always @(*) begin
+    memb_tmp = 32'h0;
+    memh_tmp = 32'h0;
     case (addr_sp) 
       2'b00: begin
       memb_tmp = (data_bs & 32'h000000ff);
@@ -309,6 +314,7 @@ module  data_trsf
   end
 
   always @(*) begin
+    data_af = 32'h0;
     if(wr_en) begin
       case (slt_sl) 
         SW: data_af = data_bf;
@@ -333,53 +339,53 @@ module  data_trsf
     end
     else begin
       case (slt_sl) 
-      LW: data_af = data_bs;
-      LBU: begin
-        case (addr_sp) 
-          2'b00: data_af = memb_tmp;
-          2'b01: data_af = {8'b0, memb_tmp[31:8]};  //(memb_tmp >>8);
-          2'b10: data_af = {16'b0,memb_tmp[31:16]}; //(memb_tmp >>16);
-          2'b11: data_af = {23'b0,memb_tmp[31:24]}; //(memb_tmp >>24);
-        endcase
-      end
-      LHU: begin
-        case(addr_sp)
-          2'b00: data_af = memh_tmp;
-          2'b01: data_af = memh_tmp;
-          2'b10: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
-          2'b11: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
-        endcase
-      end
-      LB: begin
-        case (addr_sp)
-          2'b00: data_af = (memb_tmp[7])  ? {24'hffffff, memb_tmp[7:0]}   : {24'h000000, memb_tmp[7:0]};
-          2'b01: data_af = (memb_tmp[15]) ? {24'hffffff, memb_tmp[15:8]}  : {24'h000000, memb_tmp[15:8]};
-          2'b10: data_af = (memb_tmp[23]) ? {24'hffffff, memb_tmp[23:16]} : {24'h000000, memb_tmp[23:16]};
-          2'b11: data_af = (memb_tmp[31]) ? {24'hffffff, memb_tmp[31:24]} : {24'h000000, memb_tmp[31:24]};
-        endcase
-        /*case(addr_sp)
-          2'b00: data_af = (memb_tmp[7] == 1) ? (memb_tmp | 32'hffffff00): memb_tmp;
-          2'b01: data_af = (memb_tmp[15] == 1)? ((memb_tmp >> 8) | 32'hffffff00) : (memb_tmp >>8);
-          2'b10: data_af = (memb_tmp[23] == 1)? ((memb_tmp >> 16) | 32'hffffff00) : (memb_tmp >>16);
-          2'b11: data_af = (memb_tmp[31] == 1)? ((memb_tmp >> 24) | 32'hffffff00) : (memb_tmp >>24);
-        endcase*/
-      end
-      
-      LH: begin
-        case (addr_sp)
-          2'b00: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
-          2'b01: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
-          2'b10: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
-          2'b11: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
-        endcase
-        /*case(addr_sp)
-          2'b00: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
-          2'b01: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
-          2'b10: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
-          2'b11: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
-        endcase*/
-      end
-      default: data_af = 32'h00000000;
+        LW: data_af = data_bs;
+        LBU: begin
+          case (addr_sp) 
+            2'b00: data_af = memb_tmp;
+            2'b01: data_af = {8'b0, memb_tmp[31:8]};  //(memb_tmp >>8);
+            2'b10: data_af = {16'b0,memb_tmp[31:16]}; //(memb_tmp >>16);
+            2'b11: data_af = {23'b0,memb_tmp[31:24]}; //(memb_tmp >>24);
+          endcase
+        end
+        LHU: begin
+          case(addr_sp)
+            2'b00: data_af = memh_tmp;
+            2'b01: data_af = memh_tmp;
+            2'b10: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
+            2'b11: data_af = {16'b0,memh_tmp[31:16]}; //memh_tmp >> 16;
+          endcase
+        end
+        LB: begin
+          case (addr_sp)
+            2'b00: data_af = (memb_tmp[7])  ? {24'hffffff, memb_tmp[7:0]}   : {24'h000000, memb_tmp[7:0]};
+            2'b01: data_af = (memb_tmp[15]) ? {24'hffffff, memb_tmp[15:8]}  : {24'h000000, memb_tmp[15:8]};
+            2'b10: data_af = (memb_tmp[23]) ? {24'hffffff, memb_tmp[23:16]} : {24'h000000, memb_tmp[23:16]};
+            2'b11: data_af = (memb_tmp[31]) ? {24'hffffff, memb_tmp[31:24]} : {24'h000000, memb_tmp[31:24]};
+          endcase
+          /*case(addr_sp)
+            2'b00: data_af = (memb_tmp[7] == 1) ? (memb_tmp | 32'hffffff00): memb_tmp;
+            2'b01: data_af = (memb_tmp[15] == 1)? ((memb_tmp >> 8) | 32'hffffff00) : (memb_tmp >>8);
+            2'b10: data_af = (memb_tmp[23] == 1)? ((memb_tmp >> 16) | 32'hffffff00) : (memb_tmp >>16);
+            2'b11: data_af = (memb_tmp[31] == 1)? ((memb_tmp >> 24) | 32'hffffff00) : (memb_tmp >>24);
+          endcase*/
+        end
+        
+        LH: begin
+          case (addr_sp)
+            2'b00: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
+            2'b01: data_af = (memh_tmp[15]) ? {16'hffff, memh_tmp[15:0]}   : {16'h0000, memh_tmp[15:0]};
+            2'b10: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
+            2'b11: data_af = (memh_tmp[31]) ? {16'hffff, memh_tmp[31:16]}  : {16'h0000, memh_tmp[31:16]};
+          endcase
+          /*case(addr_sp)
+            2'b00: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
+            2'b01: data_af = (memh_tmp[15] == 1)? (memh_tmp | 32'hffff0000): memh_tmp;
+            2'b10: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
+            2'b11: data_af = (memh_tmp[31] == 1)? ((memh_tmp >> 16) | 32'hffff0000) : (memh_tmp >>16);
+          endcase*/
+        end
+        default: data_af = 32'h0;
       endcase
     end
   end
@@ -395,6 +401,7 @@ module mux_3_1_lsu(
   logic [1:0] addr_sel ;
  
   always @(*) begin
+    addr_sel = 2'b11;
     case (i_lsu_addr[31:12])
       20'h1001_0:  addr_sel  =  2'b00; // SW
       20'h1000_4:  addr_sel  =  2'b01; //LCD
@@ -403,15 +410,16 @@ module mux_3_1_lsu(
       20'h1000_1:  addr_sel  =  2'b01; //GRL
       20'h1000_0:  addr_sel  =  2'b01; //RL
       20'h0000_0:  addr_sel  =  2'b10; //MEM
-      default addr_sel = 2'b11; 
+      default: addr_sel = 2'b11; 
     endcase
   end
   always @(*) begin
+    o_ld_data = 32'h0;
     case(addr_sel)
     2'b00:o_ld_data = in_data_1_i; // input_bf
     2'b01:o_ld_data = in_data_2_i; // output_bf
     2'b10:o_ld_data = in_data_3_i; // mem
-    default: o_ld_data = 32'd0;    
+    default: o_ld_data = 32'h0;    
     endcase
   end
 endmodule

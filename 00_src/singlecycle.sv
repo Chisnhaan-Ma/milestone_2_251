@@ -17,19 +17,19 @@ module singlecycle(
     output  logic [31:0]  o_pc_debug,
     output  logic         o_inst_vld,
 
-    input   logic  [31:0]    i_io_sw,
+    input   logic  [31:0] i_io_sw,
 
-	output  logic  [31:0]    o_io_lcd ,
-	output  logic  [31:0]    o_io_ledg,
-	output  logic  [31:0]    o_io_ledr,
-	output  logic  [6:0]    o_io_hex0, 
-	output  logic  [6:0]    o_io_hex1, 
-	output  logic  [6:0]    o_io_hex2, 
-	output  logic  [6:0]    o_io_hex3,
-	output  logic  [6:0]    o_io_hex4,
-	output  logic  [6:0]    o_io_hex5,
-	output  logic  [6:0]    o_io_hex6,
-	output  logic  [6:0]    o_io_hex7
+	output  logic  [31:0] o_io_lcd ,
+	output  logic  [31:0] o_io_ledg,
+	output  logic  [31:0] o_io_ledr,
+	output  logic  [6:0]  o_io_hex0, 
+	output  logic  [6:0]  o_io_hex1, 
+	output  logic  [6:0]  o_io_hex2, 
+	output  logic  [6:0]  o_io_hex3,
+	output  logic  [6:0]  o_io_hex4,
+	output  logic  [6:0]  o_io_hex5,
+	output  logic  [6:0]  o_io_hex6,
+	output  logic  [6:0]  o_io_hex7
 );
 	///- processor internal signal -///
 
@@ -92,124 +92,132 @@ module singlecycle(
     
 
     pc pc_top (
-        .i_clk(i_clk),
-        .i_reset(i_reset),
-        .i_pc_data_in(pc_data_in),
-        .o_pc_data_out(pc_data_out)
+        .i_clk          (i_clk),
+        .i_reset        (i_reset),
+        .i_pc_data_in   (pc_data_in),
+        .o_pc_data_out  (pc_data_out)
         );
 
     add_sub_32_bit pc_add4 (
-        .A(pc_data_out),
-        .B(32'd4),
-        .Sel(1'b0),
-        .Result(pc_add4_out));
+        .A              (pc_data_out),
+        .B              (32'd4),
+        .Sel            (1'b0),
+        .Result         (pc_add4_out)
+        );
 
     inst_memory inst_memory_top (
-        .i_addr(pc_data_out),
-        .o_rdata(inst)
+        .i_addr         (pc_data_out),
+        .o_rdata        (inst)
         );
     
     imm_gen imm_gen_top(
-        .i_imm_sel(imm_sel),
-        .i_inst(inst),
-        .o_imm_out(imm_out));
+        .i_imm_sel      (imm_sel),
+        .i_inst         (inst),
+        .o_imm_out      (imm_out)
+        );
 
     alu alu_top(
-        .i_operand_a(operand_a),
-        .i_operand_b(operand_b),
-        .i_alu_op(alu_op),
-        .o_alu_data(alu_data));
+        .i_operand_a    (operand_a),
+        .i_operand_b    (operand_b),
+        .i_alu_op       (alu_op),
+        .o_alu_data     (alu_data)
+        );
 
     lsu lsu_top(
-        .i_clk(i_clk),
-        .i_reset(i_reset),
+        .i_clk          (i_clk),
+        .i_reset        (i_reset),
 
-        .i_lsu_wren(wren),
-        .i_lsu_addr(alu_data),
-        .i_st_data(rs2_data),
+        .i_lsu_wren     (wren),
+        .i_lsu_addr     (alu_data),
+        .i_st_data      (rs2_data),
 
-        .slt_sl(slt_sl),
+        .slt_sl         (slt_sl),
 
-        .i_io_sw (i_io_sw),
+        .i_io_sw        (i_io_sw),
 
-        .o_ld_data     (ld_data),
-        .o_io_lcd      (o_io_lcd    ), 
-        .o_io_ledg     (o_io_ledg   ), 
-        .o_io_ledr     (o_io_ledr   ), 
-        .o_io_hex0     (o_io_hex0   ), 
-        .o_io_hex1     (o_io_hex1   ), 
-        .o_io_hex2     (o_io_hex2   ), 
-        .o_io_hex3     (o_io_hex3   ),
-        .o_io_hex4     (o_io_hex4   ), 
-        .o_io_hex5     (o_io_hex5   ), 
-        .o_io_hex6     (o_io_hex6   ), 
-        .o_io_hex7     (o_io_hex7   )
+        .o_ld_data      (ld_data),
+        .o_io_lcd       (o_io_lcd    ), 
+        .o_io_ledg      (o_io_ledg   ), 
+        .o_io_ledr      (o_io_ledr   ), 
+        .o_io_hex0      (o_io_hex0   ), 
+        .o_io_hex1      (o_io_hex1   ), 
+        .o_io_hex2      (o_io_hex2   ), 
+        .o_io_hex3      (o_io_hex3   ),
+        .o_io_hex4      (o_io_hex4   ), 
+        .o_io_hex5      (o_io_hex5   ), 
+        .o_io_hex6      (o_io_hex6   ), 
+        .o_io_hex7      (o_io_hex7   )
         );
 
     mux_3_1 mux3_1_top_writeback(
-        .sel_i(wb_sel),
-        .data_0_i(ld_data),
-        .data_1_i(alu_data),
-        .data_2_i(pc_add4_out),
-        .data_out_o(rd_data));
+        .sel_i          (wb_sel),
+        .data_0_i       (ld_data),
+        .data_1_i       (alu_data),
+        .data_2_i       (pc_add4_out),
+        .data_out_o     (rd_data)
+        );
 
     brc brc_top(
-        .i_rs1_data(rs1_data),
-        .i_rs2_data(rs2_data),
-        .i_br_un(br_un),
+        .i_rs1_data     (rs1_data),
+        .i_rs2_data     (rs2_data),
+        .i_br_un        (br_un),
         
-        .o_br_equal(br_equal),
-        .o_br_less(br_less));
+        .o_br_equal     (br_equal),
+        .o_br_less      (br_less)
+        );
 
     control_unit control_unit_top(
-        .i_inst(inst),
-        .i_br_equal(br_equal),
-        .i_br_less(br_less),
+        .i_inst         (inst),
+        .i_br_equal     (br_equal),
+        .i_br_less      (br_less),
 
         .o_inst_vld_ctrl(insn_vld),
-        .o_pc_sel(pc_sel),
-        .o_imm_sel(imm_sel),
-        .o_rd_wren(rd_wren),
-        .o_br_un(br_un),
-        .o_asel(asel),
-        .o_bsel(bsel),
-        .o_alu_op(alu_op),
-        .o_wren(wren),
-        .o_slt_sl(slt_sl),
-        .o_wb_sel(wb_sel)
+        .o_pc_sel       (pc_sel),
+        .o_imm_sel      (imm_sel),
+        .o_rd_wren      (rd_wren),
+        .o_br_un        (br_un),
+        .o_asel         (asel),
+        .o_bsel         (bsel),
+        .o_alu_op       (alu_op),
+        .o_wren         (wren),
+        .o_slt_sl       (slt_sl),
+        .o_wb_sel       (wb_sel)
     );
     
     regfile regfile_top(
-        .i_clk(i_clk),
-        .i_reset(i_reset),
+        .i_clk          (i_clk),
+        .i_reset        (i_reset),
 
-        .i_rs1_addr(rs1_addr),
-        .i_rs2_addr(rs2_addr),
+        .i_rs1_addr     (rs1_addr),
+        .i_rs2_addr     (rs2_addr),
 
-        .i_rd_addr(rd_addr),
-        .i_rd_data(rd_data),
-        .i_rd_wren(rd_wren),
+        .i_rd_addr      (rd_addr),
+        .i_rd_data      (rd_data),
+        .i_rd_wren      (rd_wren),
 
-        .o_rs1_data(rs1_data),
-        .o_rs2_data(rs2_data)
+        .o_rs1_data     (rs1_data),
+        .o_rs2_data     (rs2_data)
     );
     mux_2_1 mux2_1_asel_top(
-        .data_0_i(rs1_data),
-        .data_1_i(pc_data_out),
-        .sel_i(asel),
-        .data_out_o(operand_a));
+        .data_0_i       (rs1_data),
+        .data_1_i       (pc_data_out),
+        .sel_i          (asel),
+        .data_out_o     (operand_a)
+        );
     
     mux_2_1 mux2_1_bsel_top(
-        .data_0_i(rs2_data),
-        .data_1_i(imm_out),
-        .sel_i(bsel),
-        .data_out_o(operand_b));
+        .data_0_i       (rs2_data),
+        .data_1_i       (imm_out),
+        .sel_i          (bsel),
+        .data_out_o     (operand_b)
+        );
 
     mux_2_1 mux2_1_pc_sel(
-        .data_0_i(pc_add4_out),
-        .data_1_i(alu_data),
-        .sel_i(pc_sel),
-        .data_out_o(pc_data_in));
+        .data_0_i       (pc_add4_out),
+        .data_1_i       (alu_data),
+        .sel_i          (pc_sel),
+        .data_out_o     (pc_data_in)
+        );
 
     always_ff @( posedge i_clk or posedge i_reset ) begin
         if(i_reset) begin    

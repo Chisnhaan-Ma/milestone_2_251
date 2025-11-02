@@ -4,7 +4,8 @@
 module imm_gen(	
 	input logic [2:0] i_imm_sel, // Chọn kiểu generate
 	input logic [31:0] i_inst,	// i_instruction
-	output logic [31:0] o_imm_out); // Kết quả
+	output logic [31:0] o_imm_out // Kết quả
+	);
 	// I type = 000	7'b0010011
 	// S type = 001	7'b0100011
 	// B type = 010	7'b1100011

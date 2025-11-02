@@ -1,5 +1,5 @@
 Analysis & Synthesis report for kit_single_cycle
-Tue Oct 21 13:12:07 2025
+Sun Nov 02 15:31:29 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -52,23 +52,19 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Oct 21 13:12:07 2025           ;
+; Analysis & Synthesis Status        ; Successful - Sun Nov 02 15:31:28 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; kit_single_cycle                                ;
 ; Top-level Entity Name              ; kit_single_cycle                                ;
-; Family                             ; Cyclone IV GX                                   ;
-; Total logic elements               ; 32,122                                          ;
-;     Total combinational functions  ; 14,618                                          ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 32,346                                          ;
+;     Total combinational functions  ; 14,842                                          ;
 ;     Dedicated logic registers      ; 17,633                                          ;
 ; Total registers                    ; 17633                                           ;
 ; Total pins                         ; 219                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total GXB Receiver Channel PCS     ; 0                                               ;
-; Total GXB Receiver Channel PMA     ; 0                                               ;
-; Total GXB Transmitter Channel PCS  ; 0                                               ;
-; Total GXB Transmitter Channel PMA  ; 0                                               ;
 ; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
 
@@ -78,8 +74,9 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C35F672C6       ;                    ;
 ; Top-level entity name                                                      ; kit_single_cycle   ; kit_single_cycle   ;
-; Family name                                                                ; Cyclone IV GX      ; Cyclone IV GX      ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
@@ -118,14 +115,12 @@ applicable agreement for further details.
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
 ; Auto ROM Replacement                                                       ; On                 ; On                 ;
 ; Auto RAM Replacement                                                       ; On                 ; On                 ;
-; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
 ; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
 ; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
 ; Strict RAM Replacement                                                     ; Off                ; Off                ;
 ; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
 ; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
-; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
 ; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
@@ -133,7 +128,7 @@ applicable agreement for further details.
 ; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
 ; Report Parameter Settings                                                  ; On                 ; On                 ;
 ; Report Source Assignments                                                  ; On                 ; On                 ;
 ; Report Connectivity Checks                                                 ; On                 ; On                 ;
@@ -176,171 +171,186 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; File Name with User-Entered Path                                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                  ; Library ;
 +------------------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------------+---------+
 ; kit_single_cycle.sv                                                          ; yes             ; User SystemVerilog HDL File  ; D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/kit_single_cycle.sv ;         ;
-; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_src/all.dump ; yes             ; Auto-Found Unspecified File  ; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_src/all.dump                  ;         ;
+; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_src/lcd.dump ; yes             ; Auto-Found Unspecified File  ; /hcmut/year_2025_2026/251/conmputer_organization/milestone_2/00_src/lcd.dump                  ;         ;
 +------------------------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary ;
-+--------------------------+------------------+
-; Resource                 ; Usage            ;
-+--------------------------+------------------+
-; I/O pins                 ; 219              ;
-; DSP block 9-bit elements ; 0                ;
-; Maximum fan-out node     ; i_reset~input    ;
-; Maximum fan-out          ; 17668            ;
-; Total fan-out            ; 128666           ;
-; Average fan-out          ; 3.94             ;
-+--------------------------+------------------+
++-------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary           ;
++---------------------------------------------+---------+
+; Resource                                    ; Usage   ;
++---------------------------------------------+---------+
+; Estimated Total logic elements              ; 32,346  ;
+;                                             ;         ;
+; Total combinational functions               ; 14842   ;
+; Logic element usage by number of LUT inputs ;         ;
+;     -- 4 input functions                    ; 14297   ;
+;     -- 3 input functions                    ; 430     ;
+;     -- <=2 input functions                  ; 115     ;
+;                                             ;         ;
+; Logic elements by mode                      ;         ;
+;     -- normal mode                          ; 14842   ;
+;     -- arithmetic mode                      ; 0       ;
+;                                             ;         ;
+; Total registers                             ; 17633   ;
+;     -- Dedicated logic registers            ; 17633   ;
+;     -- I/O registers                        ; 0       ;
+;                                             ;         ;
+; I/O pins                                    ; 219     ;
+; Embedded Multiplier 9-bit elements          ; 0       ;
+; Maximum fan-out node                        ; i_reset ;
+; Maximum fan-out                             ; 17645   ;
+; Total fan-out                               ; 129318  ;
+; Average fan-out                             ; 3.96    ;
++---------------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                             ;
-+------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers  ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                          ; Library Name ;
-+------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
-; |kit_single_cycle                        ; 14618 (3)         ; 17633 (33)    ; 0           ; 0            ; 0       ; 0         ; 0         ; 219  ; 0            ; |kit_single_cycle                                                                            ; work         ;
-;    |add_sub_32_bit:pc_add4|              ; 38 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4                                                     ; work         ;
-;       |full_adder:adder_32[10].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[10].FA                          ; work         ;
-;       |full_adder:adder_32[11].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[11].FA                          ; work         ;
-;       |full_adder:adder_32[12].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[12].FA                          ; work         ;
-;       |full_adder:adder_32[13].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[13].FA                          ; work         ;
-;       |full_adder:adder_32[14].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[14].FA                          ; work         ;
-;       |full_adder:adder_32[15].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[15].FA                          ; work         ;
-;       |full_adder:adder_32[16].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[16].FA                          ; work         ;
-;       |full_adder:adder_32[17].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[17].FA                          ; work         ;
-;       |full_adder:adder_32[18].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[18].FA                          ; work         ;
-;       |full_adder:adder_32[19].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[19].FA                          ; work         ;
-;       |full_adder:adder_32[20].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[20].FA                          ; work         ;
-;       |full_adder:adder_32[21].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[21].FA                          ; work         ;
-;       |full_adder:adder_32[22].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[22].FA                          ; work         ;
-;       |full_adder:adder_32[23].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[23].FA                          ; work         ;
-;       |full_adder:adder_32[24].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[24].FA                          ; work         ;
-;       |full_adder:adder_32[25].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[25].FA                          ; work         ;
-;       |full_adder:adder_32[26].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[26].FA                          ; work         ;
-;       |full_adder:adder_32[27].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[27].FA                          ; work         ;
-;       |full_adder:adder_32[28].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[28].FA                          ; work         ;
-;       |full_adder:adder_32[29].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[29].FA                          ; work         ;
-;       |full_adder:adder_32[30].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[30].FA                          ; work         ;
-;       |full_adder:adder_32[31].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[31].FA                          ; work         ;
-;       |full_adder:adder_32[3].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[3].FA                           ; work         ;
-;       |full_adder:adder_32[4].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[4].FA                           ; work         ;
-;       |full_adder:adder_32[5].FA|        ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[5].FA                           ; work         ;
-;       |full_adder:adder_32[6].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[6].FA                           ; work         ;
-;       |full_adder:adder_32[7].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[7].FA                           ; work         ;
-;       |full_adder:adder_32[8].FA|        ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[8].FA                           ; work         ;
-;       |full_adder:adder_32[9].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[9].FA                           ; work         ;
-;    |alu:alu_top|                         ; 620 (269)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top                                                                ; work         ;
-;       |add_sub_32_bit:add_sub_alu|       ; 55 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu                                     ; work         ;
-;          |full_adder:FA0|                ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:FA0                      ; work         ;
-;          |full_adder:adder_32[10].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[10].FA          ; work         ;
-;          |full_adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[11].FA          ; work         ;
-;          |full_adder:adder_32[12].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[12].FA          ; work         ;
-;          |full_adder:adder_32[13].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[13].FA          ; work         ;
-;          |full_adder:adder_32[14].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[14].FA          ; work         ;
-;          |full_adder:adder_32[15].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[15].FA          ; work         ;
-;          |full_adder:adder_32[16].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[16].FA          ; work         ;
-;          |full_adder:adder_32[17].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[17].FA          ; work         ;
-;          |full_adder:adder_32[18].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[18].FA          ; work         ;
-;          |full_adder:adder_32[19].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[19].FA          ; work         ;
-;          |full_adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[1].FA           ; work         ;
-;          |full_adder:adder_32[20].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[20].FA          ; work         ;
-;          |full_adder:adder_32[21].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[21].FA          ; work         ;
-;          |full_adder:adder_32[22].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[22].FA          ; work         ;
-;          |full_adder:adder_32[23].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[23].FA          ; work         ;
-;          |full_adder:adder_32[24].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[24].FA          ; work         ;
-;          |full_adder:adder_32[25].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[25].FA          ; work         ;
-;          |full_adder:adder_32[26].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[26].FA          ; work         ;
-;          |full_adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[27].FA          ; work         ;
-;          |full_adder:adder_32[28].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[28].FA          ; work         ;
-;          |full_adder:adder_32[29].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[29].FA          ; work         ;
-;          |full_adder:adder_32[2].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[2].FA           ; work         ;
-;          |full_adder:adder_32[3].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[3].FA           ; work         ;
-;          |full_adder:adder_32[4].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[4].FA           ; work         ;
-;          |full_adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[5].FA           ; work         ;
-;          |full_adder:adder_32[6].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[6].FA           ; work         ;
-;          |full_adder:adder_32[7].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[7].FA           ; work         ;
-;          |full_adder:adder_32[8].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[8].FA           ; work         ;
-;          |full_adder:adder_32[9].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[9].FA           ; work         ;
-;       |shift_left_logical:sll_alu|       ; 116 (116)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|shift_left_logical:sll_alu                                     ; work         ;
-;       |shift_right_logical:srl_alu|      ; 126 (126)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|shift_right_logical:srl_alu                                    ; work         ;
-;       |slt_sltu:slt_alu|                 ; 54 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu                                               ; work         ;
-;          |add_sub_32_bit:SUB|            ; 54 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB                            ; work         ;
-;             |full_adder:adder_32[10].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[10].FA ; work         ;
-;             |full_adder:adder_32[11].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[11].FA ; work         ;
-;             |full_adder:adder_32[12].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[12].FA ; work         ;
-;             |full_adder:adder_32[13].FA| ; 9 (9)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[13].FA ; work         ;
-;             |full_adder:adder_32[17].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[17].FA ; work         ;
-;             |full_adder:adder_32[18].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[18].FA ; work         ;
-;             |full_adder:adder_32[19].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[19].FA ; work         ;
-;             |full_adder:adder_32[20].FA| ; 8 (8)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[20].FA ; work         ;
-;             |full_adder:adder_32[21].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[21].FA ; work         ;
-;             |full_adder:adder_32[22].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[22].FA ; work         ;
-;             |full_adder:adder_32[23].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[23].FA ; work         ;
-;             |full_adder:adder_32[24].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[24].FA ; work         ;
-;             |full_adder:adder_32[25].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[25].FA ; work         ;
-;             |full_adder:adder_32[26].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[26].FA ; work         ;
-;             |full_adder:adder_32[27].FA| ; 8 (8)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[27].FA ; work         ;
-;             |full_adder:adder_32[28].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[28].FA ; work         ;
-;             |full_adder:adder_32[29].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[29].FA ; work         ;
-;             |full_adder:adder_32[30].FA| ; 3 (3)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[30].FA ; work         ;
-;             |full_adder:adder_32[31].FA| ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[31].FA ; work         ;
-;             |full_adder:adder_32[3].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[3].FA  ; work         ;
-;             |full_adder:adder_32[4].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[4].FA  ; work         ;
-;             |full_adder:adder_32[6].FA|  ; 5 (5)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[6].FA  ; work         ;
-;             |full_adder:adder_32[7].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[7].FA  ; work         ;
-;             |full_adder:adder_32[8].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[8].FA  ; work         ;
-;             |full_adder:adder_32[9].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[9].FA  ; work         ;
-;    |brc:brc_top|                         ; 67 (27)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top                                                                ; work         ;
-;       |add_sub_32_bit:subtractor|        ; 40 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor                                      ; work         ;
-;          |full_adder:adder_32[10].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[10].FA           ; work         ;
-;          |full_adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[11].FA           ; work         ;
-;          |full_adder:adder_32[12].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[12].FA           ; work         ;
-;          |full_adder:adder_32[13].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[13].FA           ; work         ;
-;          |full_adder:adder_32[14].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[14].FA           ; work         ;
-;          |full_adder:adder_32[15].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[15].FA           ; work         ;
-;          |full_adder:adder_32[16].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[16].FA           ; work         ;
-;          |full_adder:adder_32[17].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[17].FA           ; work         ;
-;          |full_adder:adder_32[18].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[18].FA           ; work         ;
-;          |full_adder:adder_32[19].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[19].FA           ; work         ;
-;          |full_adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[1].FA            ; work         ;
-;          |full_adder:adder_32[20].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[20].FA           ; work         ;
-;          |full_adder:adder_32[21].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[21].FA           ; work         ;
-;          |full_adder:adder_32[22].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[22].FA           ; work         ;
-;          |full_adder:adder_32[23].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[23].FA           ; work         ;
-;          |full_adder:adder_32[24].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[24].FA           ; work         ;
-;          |full_adder:adder_32[25].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[25].FA           ; work         ;
-;          |full_adder:adder_32[26].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[26].FA           ; work         ;
-;          |full_adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[27].FA           ; work         ;
-;          |full_adder:adder_32[28].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[28].FA           ; work         ;
-;          |full_adder:adder_32[29].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[29].FA           ; work         ;
-;          |full_adder:adder_32[2].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[2].FA            ; work         ;
-;          |full_adder:adder_32[30].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[30].FA           ; work         ;
-;          |full_adder:adder_32[31].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[31].FA           ; work         ;
-;          |full_adder:adder_32[3].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[3].FA            ; work         ;
-;          |full_adder:adder_32[4].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[4].FA            ; work         ;
-;          |full_adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[5].FA            ; work         ;
-;          |full_adder:adder_32[6].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[6].FA            ; work         ;
-;          |full_adder:adder_32[7].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[7].FA            ; work         ;
-;          |full_adder:adder_32[8].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[8].FA            ; work         ;
-;          |full_adder:adder_32[9].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[9].FA            ; work         ;
-;    |control_unit:control_unit_top|       ; 48 (48)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|control_unit:control_unit_top                                              ; work         ;
-;    |imm_gen:imm_gen_top|                 ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|imm_gen:imm_gen_top                                                        ; work         ;
-;    |inst_memory:inst_memory_top|         ; 153 (153)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|inst_memory:inst_memory_top                                                ; work         ;
-;    |lsu:lsu_top|                         ; 11974 (0)         ; 16576 (32)    ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top                                                                ; work         ;
-;       |datamem:mem|                      ; 11652 (11496)     ; 16384 (16384) ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|datamem:mem                                                    ; work         ;
-;          |data_trsf:trsf_st|             ; 156 (156)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|datamem:mem|data_trsf:trsf_st                                  ; work         ;
-;       |demux_sel_mem:demux_1|            ; 5 (5)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|demux_sel_mem:demux_1                                          ; work         ;
-;       |mux_3_1_lsu:mux31|                ; 15 (15)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|mux_3_1_lsu:mux31                                              ; work         ;
-;       |output_buffer:outputperiph|       ; 302 (109)         ; 160 (160)     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|output_buffer:outputperiph                                     ; work         ;
-;          |data_trsf:trsf_st|             ; 193 (193)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|output_buffer:outputperiph|data_trsf:trsf_st                   ; work         ;
-;    |mux_2_1:mux2_1_asel_top|             ; 38 (38)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_asel_top                                                    ; work         ;
-;    |mux_2_1:mux2_1_bsel_top|             ; 77 (77)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_bsel_top                                                    ; work         ;
-;    |mux_2_1:mux2_1_pc_sel|               ; 20 (20)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_pc_sel                                                      ; work         ;
-;    |mux_3_1:mux3_1_top_writeback|        ; 180 (180)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_3_1:mux3_1_top_writeback                                               ; work         ;
-;    |pc:pc_top|                           ; 10 (10)           ; 32 (32)       ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|pc:pc_top                                                                  ; work         ;
-;    |regfile:regfile_top|                 ; 1389 (1389)       ; 992 (992)     ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |kit_single_cycle|regfile:regfile_top                                                        ; work         ;
-+------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                 ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers  ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                          ; Library Name ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
+; |kit_single_cycle                        ; 14842 (3)         ; 17633 (33)    ; 0           ; 0            ; 0       ; 0         ; 219  ; 0            ; |kit_single_cycle                                                                            ; work         ;
+;    |add_sub_32_bit:pc_add4|              ; 38 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4                                                     ; work         ;
+;       |full_adder:adder_32[10].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[10].FA                          ; work         ;
+;       |full_adder:adder_32[11].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[11].FA                          ; work         ;
+;       |full_adder:adder_32[12].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[12].FA                          ; work         ;
+;       |full_adder:adder_32[13].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[13].FA                          ; work         ;
+;       |full_adder:adder_32[14].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[14].FA                          ; work         ;
+;       |full_adder:adder_32[15].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[15].FA                          ; work         ;
+;       |full_adder:adder_32[16].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[16].FA                          ; work         ;
+;       |full_adder:adder_32[17].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[17].FA                          ; work         ;
+;       |full_adder:adder_32[18].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[18].FA                          ; work         ;
+;       |full_adder:adder_32[19].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[19].FA                          ; work         ;
+;       |full_adder:adder_32[20].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[20].FA                          ; work         ;
+;       |full_adder:adder_32[21].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[21].FA                          ; work         ;
+;       |full_adder:adder_32[22].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[22].FA                          ; work         ;
+;       |full_adder:adder_32[23].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[23].FA                          ; work         ;
+;       |full_adder:adder_32[24].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[24].FA                          ; work         ;
+;       |full_adder:adder_32[25].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[25].FA                          ; work         ;
+;       |full_adder:adder_32[26].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[26].FA                          ; work         ;
+;       |full_adder:adder_32[27].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[27].FA                          ; work         ;
+;       |full_adder:adder_32[28].FA|       ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[28].FA                          ; work         ;
+;       |full_adder:adder_32[29].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[29].FA                          ; work         ;
+;       |full_adder:adder_32[30].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[30].FA                          ; work         ;
+;       |full_adder:adder_32[31].FA|       ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[31].FA                          ; work         ;
+;       |full_adder:adder_32[3].FA|        ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[3].FA                           ; work         ;
+;       |full_adder:adder_32[4].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[4].FA                           ; work         ;
+;       |full_adder:adder_32[5].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[5].FA                           ; work         ;
+;       |full_adder:adder_32[6].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[6].FA                           ; work         ;
+;       |full_adder:adder_32[7].FA|        ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[7].FA                           ; work         ;
+;       |full_adder:adder_32[8].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[8].FA                           ; work         ;
+;       |full_adder:adder_32[9].FA|        ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|add_sub_32_bit:pc_add4|full_adder:adder_32[9].FA                           ; work         ;
+;    |alu:alu_top|                         ; 616 (268)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top                                                                ; work         ;
+;       |add_sub_32_bit:add_sub_alu|       ; 53 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu                                     ; work         ;
+;          |full_adder:FA0|                ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:FA0                      ; work         ;
+;          |full_adder:adder_32[10].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[10].FA          ; work         ;
+;          |full_adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[11].FA          ; work         ;
+;          |full_adder:adder_32[12].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[12].FA          ; work         ;
+;          |full_adder:adder_32[13].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[13].FA          ; work         ;
+;          |full_adder:adder_32[14].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[14].FA          ; work         ;
+;          |full_adder:adder_32[15].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[15].FA          ; work         ;
+;          |full_adder:adder_32[16].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[16].FA          ; work         ;
+;          |full_adder:adder_32[17].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[17].FA          ; work         ;
+;          |full_adder:adder_32[18].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[18].FA          ; work         ;
+;          |full_adder:adder_32[19].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[19].FA          ; work         ;
+;          |full_adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[1].FA           ; work         ;
+;          |full_adder:adder_32[20].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[20].FA          ; work         ;
+;          |full_adder:adder_32[21].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[21].FA          ; work         ;
+;          |full_adder:adder_32[22].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[22].FA          ; work         ;
+;          |full_adder:adder_32[23].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[23].FA          ; work         ;
+;          |full_adder:adder_32[24].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[24].FA          ; work         ;
+;          |full_adder:adder_32[25].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[25].FA          ; work         ;
+;          |full_adder:adder_32[26].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[26].FA          ; work         ;
+;          |full_adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[27].FA          ; work         ;
+;          |full_adder:adder_32[28].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[28].FA          ; work         ;
+;          |full_adder:adder_32[29].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[29].FA          ; work         ;
+;          |full_adder:adder_32[2].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[2].FA           ; work         ;
+;          |full_adder:adder_32[3].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[3].FA           ; work         ;
+;          |full_adder:adder_32[4].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[4].FA           ; work         ;
+;          |full_adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[5].FA           ; work         ;
+;          |full_adder:adder_32[6].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[6].FA           ; work         ;
+;          |full_adder:adder_32[7].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[7].FA           ; work         ;
+;          |full_adder:adder_32[8].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[8].FA           ; work         ;
+;          |full_adder:adder_32[9].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|add_sub_32_bit:add_sub_alu|full_adder:adder_32[9].FA           ; work         ;
+;       |shift_left_logical:sll_alu|       ; 115 (115)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|shift_left_logical:sll_alu                                     ; work         ;
+;       |shift_right_logical:srl_alu|      ; 127 (127)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|shift_right_logical:srl_alu                                    ; work         ;
+;       |slt_sltu:slt_alu|                 ; 53 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu                                               ; work         ;
+;          |add_sub_32_bit:SUB|            ; 53 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB                            ; work         ;
+;             |full_adder:adder_32[10].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[10].FA ; work         ;
+;             |full_adder:adder_32[11].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[11].FA ; work         ;
+;             |full_adder:adder_32[12].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[12].FA ; work         ;
+;             |full_adder:adder_32[13].FA| ; 9 (9)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[13].FA ; work         ;
+;             |full_adder:adder_32[17].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[17].FA ; work         ;
+;             |full_adder:adder_32[18].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[18].FA ; work         ;
+;             |full_adder:adder_32[19].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[19].FA ; work         ;
+;             |full_adder:adder_32[20].FA| ; 8 (8)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[20].FA ; work         ;
+;             |full_adder:adder_32[21].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[21].FA ; work         ;
+;             |full_adder:adder_32[22].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[22].FA ; work         ;
+;             |full_adder:adder_32[23].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[23].FA ; work         ;
+;             |full_adder:adder_32[24].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[24].FA ; work         ;
+;             |full_adder:adder_32[25].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[25].FA ; work         ;
+;             |full_adder:adder_32[26].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[26].FA ; work         ;
+;             |full_adder:adder_32[27].FA| ; 8 (8)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[27].FA ; work         ;
+;             |full_adder:adder_32[28].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[28].FA ; work         ;
+;             |full_adder:adder_32[29].FA| ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[29].FA ; work         ;
+;             |full_adder:adder_32[30].FA| ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[30].FA ; work         ;
+;             |full_adder:adder_32[3].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[3].FA  ; work         ;
+;             |full_adder:adder_32[4].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[4].FA  ; work         ;
+;             |full_adder:adder_32[5].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[5].FA  ; work         ;
+;             |full_adder:adder_32[6].FA|  ; 6 (6)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[6].FA  ; work         ;
+;             |full_adder:adder_32[7].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[7].FA  ; work         ;
+;             |full_adder:adder_32[8].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[8].FA  ; work         ;
+;             |full_adder:adder_32[9].FA|  ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|alu:alu_top|slt_sltu:slt_alu|add_sub_32_bit:SUB|full_adder:adder_32[9].FA  ; work         ;
+;    |brc:brc_top|                         ; 64 (25)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top                                                                ; work         ;
+;       |add_sub_32_bit:subtractor|        ; 39 (0)            ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor                                      ; work         ;
+;          |full_adder:adder_32[10].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[10].FA           ; work         ;
+;          |full_adder:adder_32[11].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[11].FA           ; work         ;
+;          |full_adder:adder_32[12].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[12].FA           ; work         ;
+;          |full_adder:adder_32[13].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[13].FA           ; work         ;
+;          |full_adder:adder_32[14].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[14].FA           ; work         ;
+;          |full_adder:adder_32[15].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[15].FA           ; work         ;
+;          |full_adder:adder_32[16].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[16].FA           ; work         ;
+;          |full_adder:adder_32[17].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[17].FA           ; work         ;
+;          |full_adder:adder_32[18].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[18].FA           ; work         ;
+;          |full_adder:adder_32[19].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[19].FA           ; work         ;
+;          |full_adder:adder_32[1].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[1].FA            ; work         ;
+;          |full_adder:adder_32[20].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[20].FA           ; work         ;
+;          |full_adder:adder_32[21].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[21].FA           ; work         ;
+;          |full_adder:adder_32[22].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[22].FA           ; work         ;
+;          |full_adder:adder_32[23].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[23].FA           ; work         ;
+;          |full_adder:adder_32[24].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[24].FA           ; work         ;
+;          |full_adder:adder_32[25].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[25].FA           ; work         ;
+;          |full_adder:adder_32[26].FA|    ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[26].FA           ; work         ;
+;          |full_adder:adder_32[27].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[27].FA           ; work         ;
+;          |full_adder:adder_32[28].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[28].FA           ; work         ;
+;          |full_adder:adder_32[29].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[29].FA           ; work         ;
+;          |full_adder:adder_32[2].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[2].FA            ; work         ;
+;          |full_adder:adder_32[30].FA|    ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[30].FA           ; work         ;
+;          |full_adder:adder_32[3].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[3].FA            ; work         ;
+;          |full_adder:adder_32[4].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[4].FA            ; work         ;
+;          |full_adder:adder_32[5].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[5].FA            ; work         ;
+;          |full_adder:adder_32[6].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[6].FA            ; work         ;
+;          |full_adder:adder_32[7].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[7].FA            ; work         ;
+;          |full_adder:adder_32[8].FA|     ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[8].FA            ; work         ;
+;          |full_adder:adder_32[9].FA|     ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|brc:brc_top|add_sub_32_bit:subtractor|full_adder:adder_32[9].FA            ; work         ;
+;    |control_unit:control_unit_top|       ; 48 (48)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|control_unit:control_unit_top                                              ; work         ;
+;    |imm_gen:imm_gen_top|                 ; 1 (1)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|imm_gen:imm_gen_top                                                        ; work         ;
+;    |inst_memory:inst_memory_top|         ; 414 (414)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|inst_memory:inst_memory_top                                                ; work         ;
+;    |lsu:lsu_top|                         ; 11949 (0)         ; 16576 (32)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top                                                                ; work         ;
+;       |datamem:mem|                      ; 11633 (11478)     ; 16384 (16384) ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|datamem:mem                                                    ; work         ;
+;          |data_trsf:trsf_st|             ; 155 (155)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|datamem:mem|data_trsf:trsf_st                                  ; work         ;
+;       |demux_sel_mem:demux_1|            ; 2 (2)             ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|demux_sel_mem:demux_1                                          ; work         ;
+;       |mux_3_1_lsu:mux31|                ; 12 (12)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|mux_3_1_lsu:mux31                                              ; work         ;
+;       |output_buffer:outputperiph|       ; 302 (108)         ; 160 (160)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|output_buffer:outputperiph                                     ; work         ;
+;          |data_trsf:trsf_st|             ; 194 (194)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|lsu:lsu_top|output_buffer:outputperiph|data_trsf:trsf_st                   ; work         ;
+;    |mux_2_1:mux2_1_asel_top|             ; 33 (33)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_asel_top                                                    ; work         ;
+;    |mux_2_1:mux2_1_bsel_top|             ; 77 (77)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_bsel_top                                                    ; work         ;
+;    |mux_2_1:mux2_1_pc_sel|               ; 20 (20)           ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_2_1:mux2_1_pc_sel                                                      ; work         ;
+;    |mux_3_1:mux3_1_top_writeback|        ; 178 (178)         ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|mux_3_1:mux3_1_top_writeback                                               ; work         ;
+;    |pc:pc_top|                           ; 10 (10)           ; 32 (32)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|pc:pc_top                                                                  ; work         ;
+;    |regfile:regfile_top|                 ; 1391 (1391)       ; 992 (992)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |kit_single_cycle|regfile:regfile_top                                                        ; work         ;
++------------------------------------------+-------------------+---------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -521,7 +531,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:01:39     ;
+; Top            ; 00:01:27     ;
 +----------------+--------------+
 
 
@@ -531,18 +541,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Oct 21 13:10:15 2025
+    Info: Processing started: Sun Nov 02 15:29:48 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off kit_single_cycle -c kit_single_cycle
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 22 design units, including 22 entities, in source file kit_single_cycle.sv
     Info (12023): Found entity 1: kit_single_cycle
-    Info (12023): Found entity 2: add_sub_32_bit
-    Info (12023): Found entity 3: alu
-    Info (12023): Found entity 4: brc
-    Info (12023): Found entity 5: control_unit
-    Info (12023): Found entity 6: full_adder
-    Info (12023): Found entity 7: imm_gen
-    Info (12023): Found entity 8: inst_memory
+    Info (12023): Found entity 2: inst_memory
+    Info (12023): Found entity 3: add_sub_32_bit
+    Info (12023): Found entity 4: alu
+    Info (12023): Found entity 5: brc
+    Info (12023): Found entity 6: control_unit
+    Info (12023): Found entity 7: full_adder
+    Info (12023): Found entity 8: imm_gen
     Info (12023): Found entity 9: lsu
     Info (12023): Found entity 10: datamem
     Info (12023): Found entity 11: demux_sel_mem
@@ -563,10 +573,10 @@ Info (12128): Elaborating entity "pc" for hierarchy "pc:pc_top"
 Info (12128): Elaborating entity "add_sub_32_bit" for hierarchy "add_sub_32_bit:pc_add4"
 Info (12128): Elaborating entity "full_adder" for hierarchy "add_sub_32_bit:pc_add4|full_adder:FA0"
 Info (12128): Elaborating entity "inst_memory" for hierarchy "inst_memory:inst_memory_top"
-Warning (10850): Verilog HDL warning at kit_single_cycle.sv(683): number of words (63) in memory file does not match the number of elements in the address range [0:2048]
-Warning (10030): Net "imem.data_a" at kit_single_cycle.sv(681) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "imem.waddr_a" at kit_single_cycle.sv(681) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "imem.we_a" at kit_single_cycle.sv(681) has no driver or initial value, using a default initial value '0'
+Warning (10850): Verilog HDL warning at kit_single_cycle.sv(235): number of words (149) in memory file does not match the number of elements in the address range [0:2048]
+Warning (10030): Net "imem.data_a" at kit_single_cycle.sv(233) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "imem.waddr_a" at kit_single_cycle.sv(233) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "imem.we_a" at kit_single_cycle.sv(233) has no driver or initial value, using a default initial value '0'
 Info (12128): Elaborating entity "imm_gen" for hierarchy "imm_gen:imm_gen_top"
 Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_top"
 Info (12128): Elaborating entity "shift_left_logical" for hierarchy "alu:alu_top|shift_left_logical:sll_alu"
@@ -575,13 +585,13 @@ Info (12128): Elaborating entity "shift_right_arithmetic" for hierarchy "alu:alu
 Info (12128): Elaborating entity "slt_sltu" for hierarchy "alu:alu_top|slt_sltu:slt_alu"
 Info (12128): Elaborating entity "lsu" for hierarchy "lsu:lsu_top"
 Info (12128): Elaborating entity "datamem" for hierarchy "lsu:lsu_top|datamem:mem"
-Warning (10027): Verilog HDL or VHDL warning at the kit_single_cycle.sv(825): index expression is not wide enough to address all of the elements in the array
-Warning (10027): Verilog HDL or VHDL warning at the kit_single_cycle.sv(839): index expression is not wide enough to address all of the elements in the array
+Warning (10027): Verilog HDL or VHDL warning at the kit_single_cycle.sv(822): index expression is not wide enough to address all of the elements in the array
+Warning (10027): Verilog HDL or VHDL warning at the kit_single_cycle.sv(836): index expression is not wide enough to address all of the elements in the array
 Info (12128): Elaborating entity "data_trsf" for hierarchy "lsu:lsu_top|datamem:mem|data_trsf:trsf_st"
 Info (12128): Elaborating entity "demux_sel_mem" for hierarchy "lsu:lsu_top|demux_sel_mem:demux_1"
 Info (12128): Elaborating entity "output_buffer" for hierarchy "lsu:lsu_top|output_buffer:outputperiph"
 Info (12128): Elaborating entity "mux_3_1_lsu" for hierarchy "lsu:lsu_top|mux_3_1_lsu:mux31"
-Info (10264): Verilog HDL Case Statement information at kit_single_cycle.sv(1099): all case item expressions in this case statement are onehot
+Info (10264): Verilog HDL Case Statement information at kit_single_cycle.sv(1104): all case item expressions in this case statement are onehot
 Info (12128): Elaborating entity "mux_3_1" for hierarchy "mux_3_1:mux3_1_top_writeback"
 Info (12128): Elaborating entity "brc" for hierarchy "brc:brc_top"
 Info (12128): Elaborating entity "control_unit" for hierarchy "control_unit:control_unit_top"
@@ -657,19 +667,18 @@ Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File 
 Warning (12241): 3 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
     Warning (13310): Register "o_inst_vld~reg0" is converted into an equivalent circuit using register "o_inst_vld~reg0_emulated" and latch "o_inst_vld~1"
-Info (286030): Timing-Driven Synthesis is running
 Info (144001): Generated suppressed messages file D:/HCMUT/Year_2025_2026/251/Conmputer_Organization/milestone_2/03_Quartus/output_files/kit_single_cycle.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 32449 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 32673 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 34 input pins
     Info (21059): Implemented 185 output pins
-    Info (21061): Implemented 32230 logic cells
+    Info (21061): Implemented 32454 logic cells
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 78 warnings
-    Info: Peak virtual memory: 5638 megabytes
-    Info: Processing ended: Tue Oct 21 13:12:07 2025
-    Info: Elapsed time: 00:01:52
-    Info: Total CPU time (on all processors): 00:01:51
+    Info: Peak virtual memory: 5616 megabytes
+    Info: Processing ended: Sun Nov 02 15:31:29 2025
+    Info: Elapsed time: 00:01:41
+    Info: Total CPU time (on all processors): 00:01:40
 
 
 +------------------------------------------+

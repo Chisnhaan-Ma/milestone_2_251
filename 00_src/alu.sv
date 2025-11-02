@@ -16,47 +16,53 @@ module alu(
 	//  output
 	output  logic  [31:0]  o_alu_data
 );
-    logic [31:0] add_sub_out, sll_out, srl_out, sra_out;
-    logic [31:0] slt_out, sltu_out;
+    logic [31:0] add_sub_out; 
+	logic [31:0] sll_out;
+	logic [31:0] srl_out; 
+	logic [31:0] sra_out;
+    logic [31:0] slt_out; 
+	logic [31:0] sltu_out;
 
     // Instance các module cần dùng
 	 // ADD, SUB
     add_sub_32_bit add_sub_alu( 
-	 .A(i_operand_a),
-	 .B(i_operand_b),
-	 .Sel(i_alu_op[3]),
-	 .Result(add_sub_out)); 
+	 .A		(i_operand_a),
+	 .B		(i_operand_b),
+	 .Sel	(i_alu_op[3]),
+	 .Result(add_sub_out)
+	 ); 
 	 
 	 // SLL
     shift_left_logical sll_alu(
-	 .data_in(i_operand_a),
-	 .shift_amt(i_operand_b[4:0]),
-	 .data_out(sll_out)); // SLL
+	 .data_in	(i_operand_a),
+	 .shift_amt	(i_operand_b[4:0]),
+	 .data_out	(sll_out)); // SLL
 
 	 // SRL
     shift_right_logical srl_alu(
-	 .data_in(i_operand_a), 
-	 .shift_amt(i_operand_b[4:0]),
-	 .data_out(srl_out)); 
+	 .data_in	(i_operand_a), 
+	 .shift_amt	(i_operand_b[4:0]),
+	 .data_out	(srl_out)
+	 ); 
 	 
 	 // SRA
     shift_right_arithmetic sra_alu(
-	 .data_in(i_operand_a), 
-	 .shift_amt(i_operand_b[4:0]),
-	 .data_out(sra_out)); 
+	 .data_in	(i_operand_a), 
+	 .shift_amt	(i_operand_b[4:0]),
+	 .data_out	(sra_out)); 
 	 
 	 // SLT
     slt_sltu slt_alu(
-	 .A(i_operand_a), 
-	 .B(i_operand_b), 
-	 .Sel(1'b0),
+	 .A		(i_operand_a), 
+	 .B		(i_operand_b), 
+	 .Sel	(1'b0),
 	 .Result(slt_out));  
 	 
 	 // SLT
     slt_sltu sltu_alu(
-	 .A(i_operand_a),
-	 .B(i_operand_b), 
-	 .Sel(1'b1), 
+	 .A		(i_operand_a),
+	 .B(	i_operand_b), 
+	 .Sel	(1'b1), 
 	 .Result(sltu_out));  
 
     always @(*) begin

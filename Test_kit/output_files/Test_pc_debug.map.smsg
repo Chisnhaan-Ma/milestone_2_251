@@ -1,0 +1,6 @@
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(349): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(511): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(685): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(1253): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(1301): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Test_pc_debug.sv(1350): extended using "x" or "z"

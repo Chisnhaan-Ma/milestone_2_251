@@ -14,11 +14,11 @@ module  brc (
     logic Cout;         // Carry-out từ add_sub_32_bit
 
     add_sub_32_bit subtractor (
-        .A(i_rs1_data),
-        .B(i_rs2_data),
-        .Sel(1'b1),   // SUB
-        .Result(Diff),
-        .Cout(Cout)
+        .A      (i_rs1_data),
+        .B      (i_rs2_data),
+        .Sel    (1'b1),   // SUB
+        .Result (Diff),
+        .Cout   (Cout)
     );
 
     // o_br_equal
