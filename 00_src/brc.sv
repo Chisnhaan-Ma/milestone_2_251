@@ -7,8 +7,8 @@ module  brc (
 	input  logic  [31:0]  i_rs2_data,
 	input  logic          i_br_un,
 	//  output
-	output  logic  o_br_less,
-	output  logic  o_br_equal
+	output  logic         o_br_less,
+	output  logic         o_br_equal
 );
  logic [31:0] Diff;  // Kết quả phép trừ rs1 - rs2
     logic Cout;         // Carry-out từ add_sub_32_bit

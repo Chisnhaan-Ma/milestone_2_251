@@ -1,34 +1,36 @@
 `ifndef LSU
 `define LSU
-`include "data_memory.sv"
-`include "load_unit.sv"
-`include "mux3_1.sv"
+//`include "data_memory.sv"
+//`include "load_unit.sv"
+//`include "mux3_1.sv"
 /*------------------------------------------------------------*/
 
 
 /*------------------------------------------------------------*/
 
 module lsu (
-    input logic i_clk, i_reset, i_lsu_wren,
+    input logic         i_clk, 
+    input logic         i_reset,
+    input logic         i_lsu_wren,
 
-    input logic [31:0] i_lsu_addr,
-    input logic [31:0] i_st_data,  
+    input logic [31:0]  i_lsu_addr,
+    input logic [31:0]  i_st_data,  
+    input logic [2:0]   slt_sl,
+    input logic [31:0]  i_io_sw, 
+
     output logic [31:0] o_ld_data, 
-    input logic [2:0] slt_sl,
-
-    output logic [31:0] o_io_ledr, //
+    output logic [31:0] o_io_ledr, 
     output logic [31:0] o_io_ledg,  
-    output logic [6:0] o_io_hex0, 
-    output logic [6:0] o_io_hex1, 
-    output logic [6:0] o_io_hex2,   
-    output logic [6:0] o_io_hex3,  // output buffer
-    output logic [6:0] o_io_hex4, 
-    output logic [6:0] o_io_hex5, 
-    output logic [6:0] o_io_hex6,   
-    output logic [6:0] o_io_hex7, 
-    output logic [31:0] o_io_lcd, //
+    output logic [6:0]  o_io_hex0, 
+    output logic [6:0]  o_io_hex1, 
+    output logic [6:0]  o_io_hex2,   
+    output logic [6:0]  o_io_hex3,  
+    output logic [6:0]  o_io_hex4, 
+    output logic [6:0]  o_io_hex5, 
+    output logic [6:0]  o_io_hex6,   
+    output logic [6:0]  o_io_hex7, 
+    output logic [31:0] o_io_lcd 
     
-    input logic [31:0] i_io_sw // switch -> input buffer
   );
 
   localparam RESERVED_1  = 32'h1001_1000;
@@ -44,10 +46,12 @@ module lsu (
   
   /*---------------------------------*/
 
-  logic [31:0] data_out_1, data_out_2, data_out_3; // IO_switchs - peripheral registers - Data (SRAM)
-  logic en_datamem;
-  logic en_op_buf;
-  //logic ACK;
+  logic [31:0]  data_out_1; 
+  logic [31:0]  data_out_2; 
+  logic [31:0]  data_out_3; // IO_switchs - peripheral registers - Data (SRAM)
+  logic         en_datamem;
+  logic         en_op_buf;
+
 /*-------- Input buffer --------*/
   logic [31:0] INPUT;
   always_ff @(posedge i_clk) begin // ghi đồng bộ
@@ -57,26 +61,26 @@ module lsu (
 
 /*-------- Data mem --------*/
   datamem mem (
-    .i_clk(i_clk),
-    .i_reset(i_reset),
-    .i_wren(i_lsu_wren),
-    .slt_sl(slt_sl),
-    .i_enb(en_datamem),
-    .i_addr(i_lsu_addr[10:0]), // 21 bits cao giong nhau -> xet 11 bit thap
-    .i_data(i_st_data),
-    .o_data(data_out_3)
+    .i_clk    (i_clk),
+    .i_reset  (i_reset),
+    .i_wren   (i_lsu_wren),
+    .slt_sl   (slt_sl),
+    .i_enb    (en_datamem),
+    .i_addr   (i_lsu_addr[10:0]), // 21 bits cao giong nhau -> xet 11 bit thap
+    .i_data   (i_st_data),
+    .o_data   (data_out_3)
   );
 
 /*-------- DEMUX --------*/
   demux_sel_mem demux_1 (
-    .i_lsu_addr(i_lsu_addr[31:0]),
-    .en_datamem(en_datamem),
-    .en_op_buf(en_op_buf)  
+    .i_lsu_addr   (i_lsu_addr[31:0]),
+    .en_datamem   (en_datamem),
+    .en_op_buf    (en_op_buf)  
   );
 
 /*-------- Output buffer --------*/
   output_buffer  outputperiph (
-    .slt_sl (slt_sl),
+    .slt_sl        (slt_sl),
     .st_data_2_i   (i_st_data), 
     .addr_2_i      (i_lsu_addr[31:0]),
     .en_bf         (en_op_buf), 
@@ -98,36 +102,39 @@ module lsu (
 	  );
 /*-------- MUX --------*/
   mux_3_1_lsu mux31  (
-    .in_data_3_i(data_out_3), 
-    .in_data_2_i(data_out_2), 
-    .in_data_1_i(data_out_1), 
-    .i_lsu_addr(i_lsu_addr[31:0]),
-    .o_ld_data(o_ld_data)
+    .in_data_3_i   (data_out_3), 
+    .in_data_2_i   (data_out_2), 
+    .in_data_1_i   (data_out_1), 
+    .i_lsu_addr    (i_lsu_addr[31:0]),
+    .o_ld_data     (o_ld_data)
     );	
 
 
 endmodule
-
+`endif 
+`ifndef DATA_MEMORY
+`define DATA_MEMORY
 module datamem (
-  input logic i_clk,
-  input logic i_reset,
-  input logic i_wren,
-  input logic i_enb,
-  input logic [2:0] slt_sl,
-  input logic [10:0] i_addr,
-  input logic [31:0] i_data,
+  input logic         i_clk,
+  input logic         i_reset,
+  input logic         i_wren,
+  input logic         i_enb,
+  input logic [2:0]   slt_sl,
+  input logic [10:0]  i_addr,
+  input logic [31:0]  i_data,
   output logic [31:0] o_data
 );
   logic [31:0] data_mem [2047:0];
-  logic [31:0] data_bs,data_tmp;
+  logic [31:0] data_bs;
+  logic [31:0] data_tmp;
 
   data_trsf trsf_st (
-    .slt_sl(slt_sl),
-    .addr_sp(i_addr[1:0]),
-    .wr_en(i_wren),
-    .data_bf(i_data),
-    .data_bs(data_bs),
-    .data_af(data_tmp)
+    .slt_sl   (slt_sl),
+    .addr_sp  (i_addr[1:0]),
+    .wr_en    (i_wren),
+    .data_bf  (i_data),
+    .data_bs  (data_bs),
+    .data_af  (data_tmp)
   );
 
   assign o_data = (i_reset == 1'b1) ? 32'h0: data_tmp;
@@ -151,64 +158,72 @@ module datamem (
     end
   end
 endmodule
+`endif 
+
+`ifndef DEMUX_SEL_MEM
+`define DEMUX_SEL_MEM
 
 module demux_sel_mem (
-    input logic [31:0] i_lsu_addr,
-    output logic en_datamem,
-    output logic en_op_buf  
+    input logic [31:0]  i_lsu_addr,
+    output logic        en_datamem,
+    output logic        en_op_buf  
   );
   parameter START_DATAMEM = 32'h0000_0000;
-  parameter END_DATAMEM = 32'h0000_0800;
-  parameter START_OP_BF = 32'h1000_0000;
-  parameter END_OP_BF = 32'h1000_5000;
+  parameter END_DATAMEM   = 32'h0000_0800;
+  parameter START_OP_BF   = 32'h1000_0000;
+  parameter END_OP_BF     = 32'h1000_5000;
 
   always @(*) begin
-    en_datamem = 1'b0;
-    en_op_buf = 1'b0;
+    en_datamem  = 1'b0;
+    en_op_buf   = 1'b0;
     if ((i_lsu_addr >= START_DATAMEM) && (i_lsu_addr < END_DATAMEM)) begin
-      en_datamem = 1'b1;
-      en_op_buf = 1'b0;
+      en_datamem  = 1'b1;
+      en_op_buf   = 1'b0;
     end
     else if ((i_lsu_addr >= START_OP_BF) && (i_lsu_addr < END_OP_BF)) begin
-      en_datamem = 1'b0;
-      en_op_buf = 1'b1;
+      en_datamem  = 1'b0;
+      en_op_buf   = 1'b1;
     end
     else begin
-      en_datamem = 1'b0;
-      en_op_buf = 1'b0;
+      en_datamem  = 1'b0;
+      en_op_buf   = 1'b0;
     end
   end
 endmodule
+`endif 
 
+`ifndef INPUT_BUFFER
+`define INPUT_BUFFER
 module output_buffer(
-  input logic [2:0] slt_sl, // chọn store/load kiểu gì (W H B HU BU)
     /* 
        SW = 3'b010, SB = 3'b000, SH = 3'b001;
        LW = 3'b101, LB = 3'b011, LH = 3'b100;
        LBU = 3'b110, LHU = 3'b111;
     */
-  input logic [31:0] st_data_2_i, // data
-	input logic [31:0] addr_2_i, // address
-  input logic en_bf, // en
-	input logic st_en_2_i, //write enable
-	input logic i_clk,
-  input logic i_reset,
+  input logic [2:0]   slt_sl, // chọn store/load kiểu gì
+  input logic [31:0]  st_data_2_i, // data
+	input logic [31:0]  addr_2_i, // address
+  input logic         en_bf, // en
+	input logic         st_en_2_i, //write enable
+	input logic         i_clk,
+  input logic         i_reset,
 
 	output logic [31:0] data_out_2_o, // data out -> mux
 	output logic [31:0] io_lcd_o,
 	output logic [31:0] io_ledg_o,
 	output logic [31:0] io_ledr_o,
-	output logic [6:0] io_hex0_o,
-	output logic [6:0] io_hex1_o,
-	output logic [6:0] io_hex2_o,
-	output logic [6:0] io_hex3_o,
-	output logic [6:0] io_hex4_o,
-	output logic [6:0] io_hex5_o,
-	output logic [6:0] io_hex6_o,
-	output logic [6:0] io_hex7_o
+	output logic [6:0]  io_hex0_o,
+	output logic [6:0]  io_hex1_o,
+	output logic [6:0]  io_hex2_o,
+	output logic [6:0]  io_hex3_o,
+	output logic [6:0]  io_hex4_o,
+	output logic [6:0]  io_hex5_o,
+	output logic [6:0]  io_hex6_o,
+	output logic [6:0]  io_hex7_o
 	 );
 
-  logic [31:0] data_bs,data_tmp;
+  logic [31:0] data_bs;
+  logic [31:0] data_tmp;
   logic [31:0] MEMBF [0:4];
 
   assign data_out_2_o = (i_reset == 1'b1) ? 32'h0: data_tmp;
@@ -225,12 +240,12 @@ module output_buffer(
   assign io_lcd_o  =  MEMBF[4];  
 
   data_trsf trsf_st (
-    .slt_sl(slt_sl),
-    .addr_sp(addr_2_i[1:0]),
-    .wr_en(st_en_2_i),
-    .data_bf(st_data_2_i),
-    .data_bs(data_bs),
-    .data_af(data_tmp)
+    .slt_sl   (slt_sl),
+    .addr_sp  (addr_2_i[1:0]),
+    .wr_en    (st_en_2_i),
+    .data_bf  (st_data_2_i),
+    .data_bs  (data_bs),
+    .data_af  (data_tmp)
   );
 
   always @(*) begin
@@ -273,22 +288,31 @@ module output_buffer(
     end
   end
 endmodule
+`endif
 
+`ifndef DATA_TRANSFER
+`define DATA_TRANSFER
 module  data_trsf
   (
-    input logic [2:0] slt_sl,
-    input logic [1:0] addr_sp,
-    input logic wr_en,
-    input logic [31:0] data_bf,
-    input logic [31:0] data_bs,
+    input logic [2:0]   slt_sl,
+    input logic [1:0]   addr_sp,
+    input logic         wr_en,
+    input logic [31:0]  data_bf,
+    input logic [31:0]  data_bs,
     output logic [31:0] data_af
   );
   // Định nghĩa giá trị SW, SB, SH, LW, LB, LH, LBU, LHU
-  localparam SW = 3'b010, SB = 3'b000, SH = 3'b001;
-  localparam LW = 3'b101, LB = 3'b011, LH = 3'b100;
-  localparam LBU = 3'b110, LHU = 3'b111;
+  localparam SW   = 3'b010;
+  localparam SB   = 3'b000;
+  localparam SH   = 3'b001;
+  localparam LW   = 3'b101;
+  localparam LB   = 3'b011;
+  localparam LH   = 3'b100;
+  localparam LBU  = 3'b110;
+  localparam LHU  = 3'b111;
 
-  logic [31:0] memb_tmp,memh_tmp;
+  logic [31:0] memb_tmp;
+  logic [31:0] memh_tmp;
 
   always @(*) begin
     memb_tmp = 32'h0;
@@ -390,7 +414,10 @@ module  data_trsf
     end
   end
 endmodule
+`endif 
 
+`ifndef MUX_3_1_LSU
+`define MUX_3_1_LSU
 module mux_3_1_lsu(
   input logic [31:0] in_data_1_i,
   input logic [31:0] in_data_2_i,
@@ -423,7 +450,6 @@ module mux_3_1_lsu(
     endcase
   end
 endmodule
-
 /*------------------------------------------------------------*/
 `endif
 

@@ -3,7 +3,7 @@
 
 module shift_right_arithmetic (
     input  logic [31:0] data_in, // Data
-    input  logic [4:0] shift_amt, // Số bit cần dịch
+    input  logic [4:0]  shift_amt, // Số bit cần dịch
     output logic [31:0] data_out); //Kết quả
 
     always @(*) begin

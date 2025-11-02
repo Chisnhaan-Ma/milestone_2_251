@@ -2,8 +2,8 @@
 `define IMM_GEN
 /////////Immediate generator///////////////
 module imm_gen(	
-	input logic [2:0] i_imm_sel, // Chọn kiểu generate
-	input logic [31:0] i_inst,	// i_instruction
+	input logic [2:0] 	i_imm_sel, // Chọn kiểu generate
+	input logic [31:0] 	i_inst,	// i_instruction
 	output logic [31:0] o_imm_out // Kết quả
 	);
 	// I type = 000	7'b0010011
